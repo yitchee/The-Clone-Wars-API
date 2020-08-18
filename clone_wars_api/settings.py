@@ -25,7 +25,7 @@ SECRET_KEY = '#7a6d3fbd%9=*o!umfpe5r348$mt017at0j=dfhv_xsft)+-)&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.clonewarsapi.com']
 
 
 # Application definition
@@ -39,13 +39,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
 
+    'django_hosts',
+
+    'home',
+
     'api',
     'api.characters',
     'api.planets',
-    
+    'api.species',
+    'api.vehicles'
 ]
 
 MIDDLEWARE = [
+    'django_hosts.middleware.HostsRequestMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -53,9 +59,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_hosts.middleware.HostsResponseMiddleware',
 ]
 
 ROOT_URLCONF = 'clone_wars_api.urls'
+ROOT_HOSTCONF = 'clone_wars_api.hosts'
+DEFAULT_HOST = 'www'
+PARENT_HOST = 'clonewarsapi.com'
 
 TEMPLATES = [
     {
