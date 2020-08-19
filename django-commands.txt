@@ -1,0 +1,10 @@
+python manage.py runserver clonewarsapi.com:80
+python manage.py sqlsequencereset <app-name>
+
+
+BEGIN;
+SELECT setval(pg_get_serial_sequence('"characters_character"','id'), coalesce(max("id"), 1), max("id") IS NOT null) FROM "characters_character";
+SELECT setval(pg_get_serial_sequence('"species_species"','id'), coalesce(max("id"), 1), max("id") IS NOT null) FROM "species_species";
+SELECT setval(pg_get_serial_sequence('"vehicles_vehicle"','id'), coalesce(max("id"), 1), max("id") IS NOT null) FROM "vehicles_vehicle";
+SELECT setval(pg_get_serial_sequence('"planets_planet"','id'), coalesce(max("id"), 1), max("id") IS NOT null) FROM "planets_planet";
+COMMIT;
