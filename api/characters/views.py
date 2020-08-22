@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse
+from django.conf import settings
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -7,11 +8,6 @@ import random
 
 from .models import Character
 from .serializers import CharacterSerializer
-
-
-# Global variables
-resource_limit = 50
-MSG_404 = "Resources do not exist"
 
 
 @api_view(['GET'])
@@ -40,15 +36,17 @@ def index(request):
         characters_set = characters_set.filter(info__affiliation__icontains=affiliation)
 
     if page:
-        characters_set = characters_set[resource_limit*(page-1):resource_limit*(page-1)+resource_limit]
+        start = settings.RESOURCE_LIMIT*(page-1)
+        end = settings.RESOURCE_LIMIT*(page-1)+settings.RESOURCE_LIMIT
+        characters_set = characters_set[start:end]
     else:
-        characters_set = characters_set[0:resource_limit]
+        characters_set = characters_set[0:settings.RESOURCE_LIMIT]
     
     serializer = CharacterSerializer(characters_set, many=True)
 
     # If nothing matches queries
     if not serializer.data:
-        return Response({"error": MSG_404}, status=404)
+        return Response({"error": settings.MSG_404}, status=404)
 
     return Response(serializer.data)
 
@@ -64,9 +62,9 @@ def characters_random(request):
 @api_view(['GET'])
 def characters_id(request, id):
     try:
-        characters = Character.objects.get(id=id)
+        character = Character.objects.get(id=id)
     except:
-        return Response({"error": MSG_404}, status=404)
+        return Response({"error": settings.MSG_404}, status=404)
         
-    serializer = CharacterSerializer(characters, many=False)
+    serializer = CharacterSerializer(character, many=False)
     return Response(serializer.data)

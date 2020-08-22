@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -20,7 +23,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '#7a6d3fbd%9=*o!umfpe5r348$mt017at0j=dfhv_xsft)+-)&'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -94,7 +97,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'clone_wars_api',
         'USER': 'clone_wars_api_admin',
-        'PASSWORD': 'b5k&5NTrC4Jk',
+        'PASSWORD': os.getenv("DB_PW"),
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -146,3 +149,7 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
     )
 }
+
+
+RESOURCE_LIMIT = 50
+MSG_404 = "Resources do not exist"
