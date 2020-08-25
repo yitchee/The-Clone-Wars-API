@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse
+from django.conf import settings
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -8,14 +9,69 @@ import random
 from .models import Vehicle
 from .serializers import VehicleSerializer
 
-
-def index(request):
-    return HttpResponse('<h1>Vehicles</h1>')
+from clone_wars_api.serializers import GenericSerializer
+from clone_wars_api.views import BaseRandomView
 
 
 @api_view(['GET'])
-def vehicles_random(request):
-    vehicles = Vehicle.objects.all()
-    random_vehicle = random.choice(vehicles)
-    serializer = VehicleSerializer(random_vehicle, many=False)
+def index(request):
+    name = request.GET.get('name', None)
+    vehicle_class = request.GET.get('class', None)
+    affiliation = request.GET.get('affiliation', None)
+    manufacturer = request.GET.get('manufacturer', None)
+    page = int(request.GET.get('page', 0))
+
+    vehicles_set = Vehicle.objects.all().order_by('id')
+    if name:
+        vehicles_set = vehicles_set.filter(name__icontains=name)
+    
+    if vehicle_class:
+        # Avaliable Options : 'Starfighter', 'Freighter', 'Walker', 'Star Destroyer', 
+        # 'Unknown', 'Tank', 'Gunship', 'Frigate', 'Transport', 'Cruiser', 'Flagship',
+        # 'Shuttle', 'Speeder', 'Capital Ship', 'Battleship', 'Repulsorcraft' ,'Vessel'
+        # 'Dreadnaught', 'Carrier'
+        vehicles_set = vehicles_set.filter(info__class__icontains=vehicle_class)
+
+    if affiliation:
+        vehicles_set = vehicles_set.filter(info__affiliation__icontains=affiliation)
+
+    if manufacturer:
+        # 'Rothana Heavy Engineering', 'Kuat Drive Yards', 'Kuat Systems Engineering',
+        # 'Hoar Chall Engineering', 'Unknown', 'Umbarans', 'Slayn & Korpil', 'Gallofree Yards',
+        # 'Hoersch-Kessel Drive, Inc.', 'Zygerrian Slave Empire', 'Corellian Engineering',
+        # 'Quarren', 'MandalMotors', 'Techno Union', 'Baktoid Armor Workshop', 'Botajef Shipyards',
+        # 'Lantillian ShipWrights', 'Huppla Pasa Tisc Shipwrights Collective', 'SoroSuub Corporation'
+        # 'Cygnus Spaceworks', 'Trade Federation', 'Kalevala Spaceworks'
+        vehicles_set = vehicles_set.filter(info__manufacturer__icontains=manufacturer)
+
+    if page:
+        start = settings.RESOURCE_LIMIT*(page-1)
+        end = settings.RESOURCE_LIMIT*(page-1)+settings.RESOURCE_LIMIT
+        vehicles_set = vehicles_set[start:end]
+    else:
+        vehicles_set = vehicles_set[0:settings.RESOURCE_LIMIT]
+    
+    serializer = VehicleSerializer(vehicles_set, many=True)
+
+    # If nothing matches queries
+    if not serializer.data:
+        return Response({"error": settings.MSG_404}, status=404)
+
+    return Response(serializer.data)
+
+
+class RandomVehicleView(BaseRandomView):
+    data_list = Vehicle.objects.all()
+    serializer = GenericSerializer
+    serializer.Meta.model = Vehicle
+
+
+@api_view(['GET'])
+def vehicles_id(request, id):
+    try:
+        vehicle = Vehicle.objects.get(id=id)
+    except:
+        return Response({"error": settings.MSG_404}, status=404)
+        
+    serializer = VehicleSerializer(vehicle, many=False)
     return Response(serializer.data)

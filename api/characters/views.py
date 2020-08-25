@@ -9,9 +9,13 @@ import random
 from .models import Character
 from .serializers import CharacterSerializer
 
+from clone_wars_api.serializers import GenericSerializer
+from clone_wars_api.views import BaseRandomView
+
 
 @api_view(['GET'])
 def index(request):
+    # print(request.headers['X-API-KEY'])
     name = request.GET.get('name', None)
     species = request.GET.get('species', None)
     gender = request.GET.get('gender', None)
@@ -51,12 +55,10 @@ def index(request):
     return Response(serializer.data)
 
 
-@api_view(['GET'])
-def characters_random(request):
-    characters = Character.objects.all()
-    random_character = random.choice(characters)
-    serializer = CharacterSerializer(random_character, many=False)
-    return Response(serializer.data)
+class RandomCharacterView(BaseRandomView):
+    data_list = Character.objects.all()
+    serializer = GenericSerializer
+    serializer.Meta.model = Character
 
 
 @api_view(['GET'])

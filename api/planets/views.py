@@ -9,6 +9,9 @@ import random
 from .models import Planet
 from .serializers import PlanetSerializer
 
+from clone_wars_api.serializers import GenericSerializer
+from clone_wars_api.views import BaseRandomView
+
 
 @api_view(['GET'])
 def index(request):
@@ -44,12 +47,10 @@ def index(request):
     return Response(serializer.data)
 
 
-@api_view(['GET'])
-def planets_random(request):
-    planets = Planet.objects.all()
-    random_planets = random.choice(planets)
-    serializer = PlanetSerializer(random_planets, many=False)
-    return Response(serializer.data)
+class RandomPlanetView(BaseRandomView):
+    data_list = Planet.objects.all()
+    serializer = GenericSerializer
+    serializer.Meta.model = Planet
 
 
 @api_view(['GET'])
