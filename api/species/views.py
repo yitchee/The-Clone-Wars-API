@@ -10,7 +10,7 @@ from .models import Species
 from .serializers import SpeciesSerializer
 
 from clone_wars_api.serializers import GenericSerializer
-from clone_wars_api.views import BaseRandomView
+from clone_wars_api.views import BaseRandomView, BaseIdView
 
 
 @api_view(['GET'])
@@ -49,12 +49,7 @@ class RandomSpeciesView(BaseRandomView):
     serializer.Meta.model = Species
 
 
-@api_view(['GET'])
-def species_id(request, id):
-    try:
-        species = Species.objects.get(id=id)
-    except:
-        return Response({"error": settings.MSG_404}, status=404)
-        
-    serializer = SpeciesSerializer(species, many=False)
-    return Response(serializer.data)
+class SpeciesIdView(BaseIdView):
+    model = Species
+    serializer = GenericSerializer
+    serializer.Meta.model = model

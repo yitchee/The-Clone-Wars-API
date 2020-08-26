@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django_hosts',
 
     'home',
+    'users',
 
     'api',
     'api.characters',
@@ -154,3 +155,6 @@ REST_FRAMEWORK = {
 
 RESOURCE_LIMIT = 50
 MSG_404 = "Resources do not exist"
+
+
+AUTH_USER_MODEL = 'users.User'

@@ -10,7 +10,7 @@ from .models import Character
 from .serializers import CharacterSerializer
 
 from clone_wars_api.serializers import GenericSerializer
-from clone_wars_api.views import BaseRandomView
+from clone_wars_api.views import BaseRandomView, BaseIdView
 
 
 @api_view(['GET'])
@@ -61,12 +61,7 @@ class RandomCharacterView(BaseRandomView):
     serializer.Meta.model = Character
 
 
-@api_view(['GET'])
-def characters_id(request, id):
-    try:
-        character = Character.objects.get(id=id)
-    except:
-        return Response({"error": settings.MSG_404}, status=404)
-        
-    serializer = CharacterSerializer(character, many=False)
-    return Response(serializer.data)
+class CharacterIdView(BaseIdView):
+    model = Character
+    serializer = GenericSerializer
+    serializer.Meta.model = model

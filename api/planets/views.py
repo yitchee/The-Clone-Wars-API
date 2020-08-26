@@ -10,7 +10,7 @@ from .models import Planet
 from .serializers import PlanetSerializer
 
 from clone_wars_api.serializers import GenericSerializer
-from clone_wars_api.views import BaseRandomView
+from clone_wars_api.views import BaseRandomView, BaseIdView
 
 
 @api_view(['GET'])
@@ -53,12 +53,7 @@ class RandomPlanetView(BaseRandomView):
     serializer.Meta.model = Planet
 
 
-@api_view(['GET'])
-def planets_id(request, id):
-    try:
-        planet = Planet.objects.get(id=id)
-    except:
-        return Response({"error": MSG_404}, status=404)
-        
-    serializer = PlanetSerializer(planet, many=False)
-    return Response(serializer.data)
+class PlanetIdView(BaseIdView):
+    model = Planet
+    serializer = GenericSerializer
+    serializer.Meta.model = model

@@ -10,7 +10,7 @@ from .models import Vehicle
 from .serializers import VehicleSerializer
 
 from clone_wars_api.serializers import GenericSerializer
-from clone_wars_api.views import BaseRandomView
+from clone_wars_api.views import BaseRandomView, BaseIdView
 
 
 @api_view(['GET'])
@@ -66,12 +66,7 @@ class RandomVehicleView(BaseRandomView):
     serializer.Meta.model = Vehicle
 
 
-@api_view(['GET'])
-def vehicles_id(request, id):
-    try:
-        vehicle = Vehicle.objects.get(id=id)
-    except:
-        return Response({"error": settings.MSG_404}, status=404)
-        
-    serializer = VehicleSerializer(vehicle, many=False)
-    return Response(serializer.data)
+class VehicleIdView(BaseIdView):
+    model = Vehicle
+    serializer = GenericSerializer
+    serializer.Meta.model = model
