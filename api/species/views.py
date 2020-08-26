@@ -9,8 +9,11 @@ import random
 from .models import Species
 from .serializers import SpeciesSerializer
 
-from clone_wars_api.serializers import GenericSerializer
-from clone_wars_api.views import BaseRandomView, BaseIdView
+from api.serializers import GenericSerializer
+from api.views import BaseRandomView, BaseIdView
+
+
+MODEL = Species
 
 
 @api_view(['GET'])
@@ -44,12 +47,8 @@ def index(request):
 
 
 class RandomSpeciesView(BaseRandomView):
-    data_list = Species.objects.all()
-    serializer = GenericSerializer
-    serializer.Meta.model = Species
+    model = MODEL
 
 
 class SpeciesIdView(BaseIdView):
-    model = Species
-    serializer = GenericSerializer
-    serializer.Meta.model = model
+    model = MODEL

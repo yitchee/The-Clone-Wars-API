@@ -9,8 +9,11 @@ import random
 from .models import Planet
 from .serializers import PlanetSerializer
 
-from clone_wars_api.serializers import GenericSerializer
-from clone_wars_api.views import BaseRandomView, BaseIdView
+from api.serializers import GenericSerializer
+from api.views import BaseRandomView, BaseIdView
+
+
+MODEL = Planet
 
 
 @api_view(['GET'])
@@ -48,12 +51,8 @@ def index(request):
 
 
 class RandomPlanetView(BaseRandomView):
-    data_list = Planet.objects.all()
-    serializer = GenericSerializer
-    serializer.Meta.model = Planet
+    model = MODEL
 
 
 class PlanetIdView(BaseIdView):
-    model = Planet
-    serializer = GenericSerializer
-    serializer.Meta.model = model
+    model = MODEL

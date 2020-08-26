@@ -9,8 +9,11 @@ import random
 from .models import Vehicle
 from .serializers import VehicleSerializer
 
-from clone_wars_api.serializers import GenericSerializer
-from clone_wars_api.views import BaseRandomView, BaseIdView
+from api.serializers import GenericSerializer
+from api.views import BaseRandomView, BaseIdView
+
+
+MODEL = Vehicle
 
 
 @api_view(['GET'])
@@ -61,12 +64,8 @@ def index(request):
 
 
 class RandomVehicleView(BaseRandomView):
-    data_list = Vehicle.objects.all()
-    serializer = GenericSerializer
-    serializer.Meta.model = Vehicle
+    model = MODEL
 
 
 class VehicleIdView(BaseIdView):
-    model = Vehicle
-    serializer = GenericSerializer
-    serializer.Meta.model = model
+    model = MODEL
