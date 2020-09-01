@@ -1,3 +1,14 @@
+{% extends "home/base.html" %}
 {% load hosts %}
+
+
+{% block head %}
+<title>The Clone Wars API</title>
+{% endblock %}
+
+
+{% block content %}
 <h1>The Clone Wars API</h1>
 <a href="{% host_url 'index' host 'api' %}">API</a>
+<a href="{% host_url 'documentation_view' host 'docs' %}">Documentation</a>
+{% endblock %}

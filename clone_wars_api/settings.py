@@ -28,7 +28,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.clonewarsapi.com']
+ALLOWED_HOSTS = ['.clonewarsapi.com', '*']
 
 
 # Application definition
@@ -44,9 +44,12 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'django_hosts',
+    'corsheaders',
+    'widget_tweaks',
 
     'home',
     'users',
+    'documentation',
 
     'api',
     'api.characters',
@@ -65,6 +68,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_hosts.middleware.HostsResponseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'clone_wars_api.urls'

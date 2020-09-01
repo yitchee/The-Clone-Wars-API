@@ -1,0 +1,17 @@
+html {
+  font-family: 'Open Sans', Roboto, sans-serif; }
+  html *:focus {
+    outline: 0 !important; }
+
+@font-face {
+  font-family: 'Star Jedi';
+  src: url("./fonts/StarJedi.woff") format("woff2"), url("./fonts/StarJedi.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; }
+#navbar #logo {
+  font-family: 'Star Jedi', 'Open Sans', Roboto, sans-serif;
+  color: #FFDE06;
+  letter-spacing: 1px; }
+
+/*# sourceMappingURL=base.css.map */

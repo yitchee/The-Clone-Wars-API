@@ -1,0 +1,12 @@
+{
+	"version": 3,
+	"file": "base.css",
+	"sources": [
+		"../scss/base.scss"
+	],
+	"sourcesContent": [
+		"$yellow-logo-color: #FFDE06;\r\nhtml {\r\n\tfont-family: 'Open Sans', Roboto, sans-serif;\r\n\t*:focus {\r\n\t\toutline: 0 !important;\r\n\t  }\r\n}\r\n\r\n@font-face {\r\n\tfont-family: 'Star Jedi';\r\n\tsrc: url('StarJedi.woff2') format('woff2'),\r\n\t\turl('StarJedi.woff') format('woff');\r\n\tfont-weight: normal;\r\n\tfont-style: normal;\r\n\tfont-display: swap;\r\n}\r\n\r\n#navbar {\r\n\t#logo {\r\n\t\tfont-family: 'Star Jedi', 'Open Sans', Roboto, sans-serif;\r\n\t\tcolor: $yellow-logo-color;\r\n\t\tletter-spacing: 1px;\r\n\t}\r\n}"
+	],
+	"names": [],
+	"mappings": ";AACA,AAAA,IAAI,CAAC;EACJ,WAAW,EAAE,+BAA+B;CAI5C;;;AALD,AAEC,IAFG,CAEH,CAAC,AAAA,MAAM,CAAC;EACP,OAAO,EAAE,YAAY;CACnB;;AAGJ,UAAU;EACT,WAAW,EAAE,WAAW;EACxB,GAAG,EAAE,qBAAqB,CAAC,eAAe,EACzC,oBAAoB,CAAC,cAAc;EACpC,WAAW,EAAE,MAAM;EACnB,UAAU,EAAE,MAAM;EAClB,YAAY,EAAE,IAAI;;;;AAGnB,AACC,OADM,CACN,KAAK,CAAC;EACL,WAAW,EAAE,4CAA4C;EACzD,KAAK,EApBa,OAAO;EAqBzB,cAAc,EAAE,GAAG;CACnB"
+}

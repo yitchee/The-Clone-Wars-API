@@ -1,4 +1,87 @@
+{% extends "home/base.html" %}
 {% load hosts %}
-<h1>The Clone Wars API</h1>
-<a href="{% host_url 'index' host 'api' %}">API</a>
-<h2>Sign Up for an API Key</h2>
+{% load static %}
+{% load widget_tweaks %}
+
+{% block head %}
+<title>Sign Up for an API key | CW API</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"
+    integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg=="
+    crossorigin="anonymous"></script>
+{% endblock %}
+
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'home/css/signup.css' %}" />
+{% endblock %}
+
+
+{% block content %}
+<div class="mx-auto flex flex-col w-11/12 sm:w-9/12 md:w-7/12 lg:w-1/2">
+    <div class="border-solid border-2 rounded-lg p-8">
+        <h2 class="text-3xl font-semibold border-b mb-4">Sign Up for an API Key</h2>
+        <div class="">
+            Enter your email to get an API key sent to your email. The key will have a limit of 5,000 requests per day.
+        </div>
+        <div class="mb-4">
+            If you already have a key, visit the <a href="{% host_url 'documentation_view' host 'docs' %}"
+                class="text-blue-500 hover:underline">documentation</a> to see how to use it.
+        </div>
+        <div id="app" class="mb-4">
+            <form id="signup-form" action="{% url 'signup' %}" method="post" @submit="submitForm" ref="signUpForm">
+                {% csrf_token %}
+                <!-- <label for="{{signup_form.email.id_for_label }}">{{ signup_form.email.label }}</label> -->
+                {% render_field signup_form.email v-model="email" placeholder="name@mail.com" type="email" class="bg-white focus:border-blue-600 focus:outline-none border border-gray-300 rounded-lg py-2 px-4 block w-full lg:w-3/4 appearance-none leading-normal mb-4" %}
+                <button form="signup-form" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center" :disabled="bFormSending">
+                    Get Key
+                    <svg class="animate-spin h-5 w-5 text-white ml-1 -mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" :class="bFormSending ? '' : 'hidden'">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                </button>
+            </form>
+        </div>
+        <div class="italic text-xs text-gray-600">
+            *NOTE: By signing up for a key, you agree to have your email stored by us. It will only be used to send the API key to you.
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+
+{% block js %}
+<script>
+    var app = new Vue({
+        delimiters: ['[[', ']]'],
+        el: '#app',
+        data: {
+            email: '',
+            bFormSending: false,
+        },
+        methods: {
+            submitForm: function (event) {
+                let formData = new FormData();
+                const headers = {
+                    "X-CSRFToken": "{{csrf_token}}",
+                }
+                formData.append('email', this.email);
+                this.bFormSending = true;
+                
+                axios.post("{% url 'signup' %}", formData, {
+                    headers: headers
+                }).then(res => {
+                    this.email = '';
+                    event.target.reset();
+                }).catch(error => {
+                    console.log("ERROR");
+                }).finally(() => {
+                    this.bFormSending = false;
+                });
+
+                event.preventDefault();
+            }
+        }
+    });
+</script>
+{% endblock %}

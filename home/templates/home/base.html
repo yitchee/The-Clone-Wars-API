@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load hosts %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    {% block head %}
+    {% endblock %}
+
+    <link href="{% static 'home/css/tailwind.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'home/css/base.css' %}" />
+    {% block css %}
+    {% endblock %}
+</head>
+
+<body class="flex flex-col min-h-screen">
+    <header id="navbar" class="bg-gray-900 flex justify-center">
+        <nav class="flex justify-between flex-wrap shadow-md w-full">
+            <a href="{% host_url 'index' host 'default' %}" class="font-semibold text-2xl md:text-3xl lg:text-4xl py-3 ml-4 md:ml-8">
+                <div class="h-full flex items-center">
+                    <span id="logo">Clone Wars Api</span>
+                </div>
+            </a>
+            <div class="block lg:hidden">
+                <div class="flex items-center h-full mr-4 md:mr-8">
+                    <button @click="toggle"
+                        class="flex items-center px-3 py-2 border rounded text-gray-300 border-gray-400 hover:text-white hover:border-white">
+                        <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <title>Menu</title>
+                            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="lg:block lg:w-auto w-full lg:flex text-gray-200 mr-0 lg:mr-4" :class="open ? 'block border-t border-white bg-gray-800': 'hidden'">
+                <div class="flex flex-col lg:flex-row block flex-grow">
+                    <a href="{% host_url 'documentation_view' host 'docs' %}"
+                        class="flex-grow hover:bg-gray-700 p-4">
+                        <div class="flex items-center h-full">
+                            Documentation
+                        </div>
+                    </a>
+                    <a href="{% host_url 'signup' host 'default' %}"
+                        class="flex-grow hover:bg-gray-700 p-4">
+                        <div class="flex items-center h-full">
+                            Get API Key
+                        </div>
+                    </a>
+                    <a href="#responsive-header"
+                        class="flex-grow hover:bg-gray-700 p-4">
+                        <div class="flex items-center h-full">
+                            Change Log
+                        </div>
+                    </a>
+                    <a href="#responsive-header"
+                        class="flex-grow hover:bg-gray-700 p-4">
+                        <div class="flex items-center h-full">
+                            Donate
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="flex flex-grow mt-8 mb-12">
+        {% block content %}
+        {% endblock %}
+    </section>
+    <footer class="bg-gray-200">
+        <div>
+            <div class="max-w-6xl m-auto text-gray-800 flex flex-wrap justify-center">
+                <div class="p-5 w-48 ">
+                    <div class="text-xs uppercase text-gray-500 font-medium">Home</div>
+                    <a class="my-3 block" href="/#">Services <span class="text-teal-600 text-xs p-1"></span></a><a
+                        class="my-3 block" href="/#">Products <span class="text-teal-600 text-xs p-1"></span></a><a
+                        class="my-3 block" href="/#">About Us <span class="text-teal-600 text-xs p-1"></span></a><a
+                        class="my-3 block" href="/#">Pricing <span class="text-teal-600 text-xs p-1"></span></a><a
+                        class="my-3 block" href="/#">Partners <span class="text-teal-600 text-xs p-1">New</span></a>
+                </div>
+                <div class="p-5 w-48 ">
+                    <div class="text-xs uppercase text-gray-500 font-medium">Resources</div>
+                    <a class="my-3 block" href="/#">Documentation <span class="text-teal-600 text-xs p-1"></span></a><a
+                        class="my-3 block" href="/#">Tutorials <span class="text-teal-600 text-xs p-1"></span></a><a
+                        class="my-3 block" href="/#">Support <span class="text-teal-600 text-xs p-1">New</span></a>
+                </div>
+                <div class="p-5 w-48 ">
+                    <div class="text-xs uppercase text-gray-500 font-medium">Support</div>
+                    <a class="my-3 block" href="/#">Help Center <span class="text-teal-600 text-xs p-1"></span></a><a
+                        class="my-3 block" href="/#">Privacy Policy <span class="text-teal-600 text-xs p-1"></span></a><a
+                        class="my-3 block" href="/#">Conditions <span class="text-teal-600 text-xs p-1"></span></a>
+                </div>
+                <div class="p-5 w-48 ">
+                    <div class="text-xs uppercase text-gray-500 font-medium">Contact us</div>
+                    <a class="my-3 block" href="/#">XXX XXXX, Floor 4 San Francisco, CA <span
+                            class="text-teal-600 text-xs p-1"></span></a><a class="my-3 block" href="/#">contact@company.com
+                        <span class="text-teal-600 text-xs p-1"></span></a>
+                </div>
+            </div>
+        </div>
+    
+        <div class="pt-2">
+            <div class="flex pb-5 px-3 m-auto pt-5 border-t text-gray-800 text-sm flex-col
+           md:flex-row max-w-6xl">
+                <div class="mt-2">© Copyright 2020. All Rights Reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    {% block js %}
+    {% endblock %}
+    <script>
+        var navbar = new Vue({
+            delimiters: ['[[', ']]'],
+            el: '#navbar',
+            data: {
+                open: false,
+            },
+            created() {
+                window.addEventListener("resize", this.resizeEventHandler);
+            },
+            destroyed() {
+                window.removeEventListener("resize", this.resizeEventHandler);
+            },
+            methods: {
+                toggle: function() {
+                    this.open = !this.open;
+                },
+                resizeEventHandler: function(e) {
+                    if (this.open && window.innerWidth > 1023) {
+                        this.open = false;
+                    }
+                },
+            }
+        });
+    </script>
+</body>
+
+</html>

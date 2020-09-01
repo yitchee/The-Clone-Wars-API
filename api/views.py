@@ -48,14 +48,14 @@ class BaseRandomView(ApiKeyCheckMixin, APIView):
 
     def get(self, request):
         # Validate API key
-        try:
-            self.validate_apikey(request)
-        except KeyError:
-            return Response({'error': 'Please provide an API key'}, status=401)
-        except ObjectDoesNotExist:
-            return Response({'error': 'Invalid API key'}, status=401)
-        except LimitExceededException:
-            return Response({'error': 'Daily limit exceeded.'}, status=429)
+        # try:
+        #     self.validate_apikey(request)
+        # except KeyError:
+        #     return Response({'error': 'Please provide an API key'}, status=401)
+        # except ObjectDoesNotExist:
+        #     return Response({'error': 'Invalid API key'}, status=401)
+        # except LimitExceededException:
+        #     return Response({'error': 'Daily limit exceeded.'}, status=429)
 
         data_list = self.model.objects.all()
         random_object = random.choice(data_list)
@@ -69,16 +69,16 @@ class BaseIdView(ApiKeyCheckMixin, APIView):
     Serializer = GenericSerializer
 
     def get(self, request, id):
-        self.set_serializer()
+        self.Serializer.Meta.model = self.model
         # Validate API key
-        try:
-            self.validate_apikey(request)
-        except KeyError:
-            return Response({'error': 'Please provide an API key'}, status=401)
-        except ObjectDoesNotExist:
-            return Response({'error': 'Invalid API key'}, status=401)
-        except LimitExceededException:
-            return Response({'error': 'Daily limit exceeded.'}, status=429)
+        # try:
+        #     self.validate_apikey(request)
+        # except KeyError:
+        #     return Response({'error': 'Please provide an API key'}, status=401)
+        # except ObjectDoesNotExist:
+        #     return Response({'error': 'Invalid API key'}, status=401)
+        # except LimitExceededException:
+        #     return Response({'error': 'Daily limit exceeded.'}, status=429)
 
         try:
             data = self.model.objects.get(id=id)
@@ -88,10 +88,6 @@ class BaseIdView(ApiKeyCheckMixin, APIView):
         serializer = self.Serializer(data, many=False)
 
         return Response(serializer.data)
-
-    def set_serializer(self):
-        self.Serializer.Meta.model = self.model
-        print(self.Serializer.Meta.model)
 
 
 class LimitExceededException(Exception):
