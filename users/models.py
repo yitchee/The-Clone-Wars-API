@@ -11,6 +11,7 @@ class UserManager(BaseUserManager):
         user = User()
         user.email = self.normalize_email(email)
         user.set_unusable_password()
+        user.save(using=self._db)
         return user
     
     def create_superuser(self, email, password):

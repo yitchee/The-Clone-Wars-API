@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = ['.clonewarsapi.com', '*']
-
+DOMAIN_NAME = 'clonewarsapi.com'
 
 # Application definition
 
@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'django_hosts',
-    'corsheaders',
     'widget_tweaks',
 
     'home',
@@ -62,13 +61,13 @@ MIDDLEWARE = [
     'django_hosts.middleware.HostsRequestMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    # 'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_hosts.middleware.HostsResponseMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'clone_wars_api.urls'
@@ -158,7 +157,6 @@ REST_FRAMEWORK = {
 
 
 RESOURCE_LIMIT = 50
-MSG_404 = "Resources do not exist"
 
 
 AUTH_USER_MODEL = 'users.User'

@@ -4,6 +4,7 @@ from django.views.generic.base import TemplateView, View
 
 from rest_framework.response import Response
 
+from users.models import User
 from .forms import SignUpForm
 
 import time
@@ -21,9 +22,15 @@ class SignUpView(View):
         return render(request, template_name=self.template_name, context=context)
     
     def post(self, request):
-        time.sleep(.5)
         form = SignUpForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data.get('email'))
-        response = JsonResponse({"success": "API Key success"})
+            new_email = form.cleaned_data.get('email')
+            if not User.objects.filter(email=new_email):
+                new_user = User()
+                new_user.email = new_email
+                User.objects.create_user(new_email)
+                response = JsonResponse({"success": "API Key success"})
+            else:
+                response = JsonResponse({"error": "API Key success"}, status=400)
+
         return response
