@@ -13,12 +13,10 @@ from api.characters.models import Character
 from .serializers import GenericSerializer
 from api.characters.serializers import CharacterSerializer
 from api.models import ApiKey
+from api.utils import validate_request, set_options_response
 
 
-CORS_HEADERS = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, OPTIONS, HEAD'
-}
+CORS_HEADERS = settings.CORS_HEADERS
 MSG_404 = "Resources do not exist"
 
 
@@ -28,25 +26,8 @@ def index(request):
 
 class ApiKeyCheckMixin():
     key = ApiKey
-    def validate_apikey(self, request):
-        try:
-            key = request.headers['X-API-KEY']
-        except:
-            raise(KeyError)
-        
-        # Check if API key is valid and within limit
-        try:
-            key = ApiKey.objects.get(key=key)
-            limit = key.daily_limit
-            if limit > 0:
-                key.daily_limit = limit - 1
-            else:
-                raise(LimitExceededException)
-            key.save()
-        except LimitExceededException:
-            raise(LimitExceededException)
-        except:
-            raise(ObjectDoesNotExist)
+    def validate_request(self, request):
+        return validate_request(request)
 
 
 class BaseRandomView(ApiKeyCheckMixin, APIView):
@@ -57,25 +38,9 @@ class BaseRandomView(ApiKeyCheckMixin, APIView):
         response = Response()
         response.headers = CORS_HEADERS
 
-        # Check if request is coming from the same origin (for demoing the api in docs)
-        print(request.headers)
-        # print(request.META)
-        try:
-            origin = request.META['HTTP_ORIGIN']
-        except:
-            origin = ''
-            
-        if settings.DOMAIN_NAME not in origin:
-            # Validate API key
-            try:
-                self.validate_apikey(request)
-            except KeyError:
-                return Response({'error': 'Please provide an API key'}, status=401, headers=CORS_HEADERS)
-            except ObjectDoesNotExist:
-                return Response({'error': 'Invalid API key'}, status=401, headers=CORS_HEADERS)
-            except LimitExceededException:
-                return Response({'error': 'Daily limit exceeded.'}, status=429, headers=CORS_HEADERS)
-        
+        result = self.validate_request(request)
+        if 'error' in result:
+            return Response({"error": result['error']}, status=result['status'], headers=CORS_HEADERS)
         data_list = self.model.objects.all()
         random_object = random.choice(data_list)
         self.Serializer.Meta.model = self.model
@@ -83,7 +48,8 @@ class BaseRandomView(ApiKeyCheckMixin, APIView):
         return Response(serializer.data, headers=CORS_HEADERS)
 
     def options(self, request):
-        response = setResponseForOptionsRequest()
+        print(123)
+        response = set_options_response()
         return response
 
 
@@ -94,17 +60,9 @@ class BaseIdView(ApiKeyCheckMixin, APIView):
     def get(self, request, id):
         self.Serializer.Meta.model = self.model
         
-        # Check if request is coming from the same origin (for demoing the api in docs)
-        if settings.DOMAIN_NAME not in request.headers['Origin']:
-            # Validate API key
-            try:
-                self.validate_apikey(request)
-            except KeyError:
-                return Response({'error': 'Please provide an API key'}, status=401, headers=CORS_HEADERS)
-            except ObjectDoesNotExist:
-                return Response({'error': 'Invalid API key'}, status=401, headers=CORS_HEADERS)
-            except LimitExceededException:
-                return Response({'error': 'Daily limit exceeded.'}, status=429, headers=CORS_HEADERS)
+        result = self.validate_request(request)
+        if 'error' in result:
+            return Response({"error": result['error']}, status=result['status'], headers=CORS_HEADERS)
 
         try:
             data = self.model.objects.get(id=id)
@@ -116,17 +74,5 @@ class BaseIdView(ApiKeyCheckMixin, APIView):
 
     # Handle 'OPTIONS' request | tells browser that CORS is enabled
     def options(self, request, id):
-        response = setResponseForOptionsRequest()
+        response = set_options_response()
         return response
-
-
-class LimitExceededException(Exception):
-    pass
-
-
-def setResponseForOptionsRequest():
-    response = Response()
-    response['Allow'] = 'GET, OPTIONS, HEAD'
-    response['Access-Control-Allow-Origin'] = '*'
-    response['Access-Control-Allow-Headers'] = 'x-api-key'
-    return response

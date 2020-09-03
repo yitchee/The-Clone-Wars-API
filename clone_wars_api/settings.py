@@ -160,3 +160,9 @@ RESOURCE_LIMIT = 50
 
 
 AUTH_USER_MODEL = 'users.User'
+
+
+CORS_HEADERS = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, OPTIONS, HEAD'
+}

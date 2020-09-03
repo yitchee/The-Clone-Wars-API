@@ -11,14 +11,21 @@ from .serializers import CharacterSerializer
 
 from api.serializers import GenericSerializer
 from api.views import BaseRandomView, BaseIdView
+from api.utils import validate_request, set_options_response
 
 
 MODEL = Character
 
 
-@api_view(['GET'])
+@api_view(['GET', 'OPTIONS'])
 def index(request):
-    # print(request.headers['X-API-KEY'])
+    if request.method == 'OPTIONS':
+        return set_options_response()
+
+    result = validate_request(request)
+    if 'error' in result:
+        return Response({"error": result['error']}, status=result['status'], headers=settings.CORS_HEADERS)
+    
     name = request.GET.get('name', None)
     species = request.GET.get('species', None)
     gender = request.GET.get('gender', None)
@@ -53,9 +60,9 @@ def index(request):
 
     # If nothing matches queries
     if not serializer.data:
-        return Response({"error": settings.MSG_404}, status=404)
+        return Response({"error": settings.MSG_404}, status=404, headers=settings.CORS_HEADERS)
 
-    return Response(serializer.data)
+    return Response(serializer.data, headers=settings.CORS_HEADERS)
 
 
 class RandomCharacterView(BaseRandomView):

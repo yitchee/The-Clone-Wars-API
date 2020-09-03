@@ -11,13 +11,21 @@ from .serializers import SpeciesSerializer
 
 from api.serializers import GenericSerializer
 from api.views import BaseRandomView, BaseIdView
+from api.utils import validate_request, set_options_response
 
 
 MODEL = Species
 
 
-@api_view(['GET'])
+@api_view(['GET', 'OPTIONS'])
 def index(request):
+    if request.method == 'OPTIONS':
+        return set_options_response()
+
+    result = validate_request(request)
+    if 'error' in result:
+        return Response({"error": result['error']}, status=result['status'], headers=settings.CORS_HEADERS)
+
     name = request.GET.get('name', None)
     designation = request.GET.get('designation', None)
     page = int(request.GET.get('page', 0))
@@ -41,9 +49,9 @@ def index(request):
 
     # If nothing matches queries
     if not serializer.data:
-        return Response({"error": settings.MSG_404}, status=404)
+        return Response({"error": settings.MSG_404}, status=404, headers=settings.CORS_HEADERS)
     
-    return Response(serializer.data)
+    return Response(serializer.data, headers=settings.CORS_HEADERS)
 
 
 class RandomSpeciesView(BaseRandomView):

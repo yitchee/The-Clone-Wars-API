@@ -16,7 +16,6 @@ class SignUpView(View):
     template_name = 'home/signup.html'
 
     def get(self, request):
-        # print(request.META['HTTP_ORIGIN'], request.build_absolute_uri('/'))
         context = {}
         context['signup_form'] = SignUpForm()
         return render(request, template_name=self.template_name, context=context)
