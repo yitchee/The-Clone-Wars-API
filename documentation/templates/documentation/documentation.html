@@ -1,1 +1,47 @@
 {% extends 'home/base.html' %}
+{% load hosts %}
+{% load static %}
+
+{% block head %}
+<title>Documentation | The Clone Wars API</title>
+<link rel="stylesheet" type="text/css" href="{% static 'documentation/css/main.css' %}" />
+<script src="https://unpkg.com/vue-router/dist/vue-router.min.js"></script>
+{% endblock %}
+
+
+{% block content %}
+<div id="docs-app" class="w-full bg-red-300 grid grid-cols-5 gap-4 mx-8">
+    <div class="col-span-1 bg-blue-300 pl-2 pt-2">
+        {% include "documentation/sidenav.html" %}
+    </div>
+    <div class="col-span-4 bg-green-100 px-2">
+        <router-view></router-view>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block js %}
+<!-- <script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.js"></script>
+<script>
+    const GettingStarted = { template: `{% include "documentation/getting_started/getting_started.html" %}` };
+    const Resources = { template: `{% include "documentation/resources/resources.html" %}` };
+    const TryItOut = { template: `{% include "documentation/try_it_out/try_it_out.html" %}` };
+
+    const router = new VueRouter({
+        mode: 'history',
+        routes: [
+            { path: '/', component: GettingStarted },
+            { path: '/getting-started', component: GettingStarted },
+            { path: '/resources', component: Resources },
+            { path: '/try-it-out', component: TryItOut }
+        ]
+    });
+
+    var docs_app = new Vue({
+        router,
+        el: '#docs-app',
+    })
+</script>
+{% endblock %}

@@ -72,7 +72,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'clone_wars_api.urls'
 ROOT_HOSTCONF = 'clone_wars_api.hosts'
-DEFAULT_HOST = 'www'
+DEFAULT_HOST = 'default'
 PARENT_HOST = 'clonewarsapi.com'
 
 TEMPLATES = [
@@ -156,6 +156,7 @@ REST_FRAMEWORK = {
 }
 
 
+MSG_404 = "Resources do not exist"
 RESOURCE_LIMIT = 50
 
 

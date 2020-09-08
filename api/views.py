@@ -3,6 +3,8 @@ from django.views import View
 from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
 
+from django_hosts.resolvers import reverse
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import serializers
@@ -20,14 +22,29 @@ CORS_HEADERS = settings.CORS_HEADERS
 MSG_404 = "Resources do not exist"
 
 
-def index(request):
-    return render(request, 'api/index.html')
-
-
 class ApiKeyCheckMixin():
     key = ApiKey
     def validate_request(self, request):
         return validate_request(request)
+
+
+class index(APIView):
+    scheme = 'http'
+    host = 'api'
+    
+    def get(self, request):
+        print(type(reverse('characters_index', host=self.host, scheme=self.scheme)))
+        response = {
+            'characters': reverse('characters_index', host=self.host, scheme=self.scheme),
+            'planets': reverse('planets_index', host=self.host, scheme=self.scheme),
+            'species': reverse('species_index', host=self.host, scheme=self.scheme),
+            'vehicles': reverse('vehicles_index', host=self.host, scheme=self.scheme),
+        }
+        return Response(response, headers=CORS_HEADERS)
+
+    def options(self, request):
+        response = set_options_response()
+        return response
 
 
 class BaseRandomView(ApiKeyCheckMixin, APIView):
@@ -48,7 +65,6 @@ class BaseRandomView(ApiKeyCheckMixin, APIView):
         return Response(serializer.data, headers=CORS_HEADERS)
 
     def options(self, request):
-        print(123)
         response = set_options_response()
         return response
 

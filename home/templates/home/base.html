@@ -6,7 +6,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     {% block head %}
     {% endblock %}
 
@@ -110,8 +109,8 @@
         </div>
     </footer>
 
-    {% block js %}
-    {% endblock %}
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
         var navbar = new Vue({
             delimiters: ['[[', ']]'],
@@ -137,6 +136,8 @@
             }
         });
     </script>
+    {% block js %}
+    {% endblock %}
 </body>
 
 </html>

@@ -1,3 +1,19 @@
+code, pre {
+  background-color: #e2e7ec;
+  border-radius: .25rem;
+  padding-left: .25rem;
+  padding-right: .25rem;
+  color: black; }
 
+#docs-sidenav ul a:hover {
+  color: #4280e6; }
+#docs-sidenav .router-link-active {
+  color: green; }
+#docs-sidenav .docs-link-headings {
+  border-top: solid;
+  border-color: gray;
+  border-width: 100%; }
+  #docs-sidenav .docs-link-headings a {
+    font-weight: bold; }
 
 /*# sourceMappingURL=main.css.map */

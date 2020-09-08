@@ -1,0 +1,31 @@
+<div id="json-schema" class="mb-8">
+    <h1 class="text-2xl mt-2">JSON Schema</h1>
+    <div>
+        This API only supports JSON format. All responses will either be a single object or an array of JSON objects. Every object will have basic fields: <code>id</code>, <code>name</code>, and <code>link</code>. <br>
+        Most objects will have additional details under the <code>info</code> key. The documentation will go more in-depth in their respective 'Resource' section.
+    </div>
+    <div>
+        <span>Example:</span>
+        <pre class="overflow-auto">
+{
+    "id": 12,
+    "name": "Ahsoka Tano",
+    "link": "https://clonewars.fandom.com/wiki/Ahsoka_Tano",
+    "info": {
+        "gender": "Female",
+        "species": "Togruta",
+        "homeworld": "Shili",
+        "affiliation": [
+            "Jedi Order (formerly)",
+            "Galactic Republic (formerly)",
+            "Nite Owls"
+        ],
+        "occupation_rank": [
+            "Jedi Padawan (formerly)",
+            "Jedi Commander (formerly)"
+        ]
+    }
+}
+        </pre>
+    </div>
+</div>

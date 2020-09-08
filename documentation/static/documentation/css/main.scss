@@ -1,0 +1,27 @@
+code, pre {
+    background-color: #e2e7ec;
+    border-radius: .25rem;
+    padding-left: .25rem;
+    padding-right: .25rem;
+    color: black;
+}
+
+#docs-sidenav {
+    ul a:hover {
+        color: rgb(66, 128, 230);
+    }
+
+    .router-link-active {
+        color: green;
+    }
+
+    .docs-link-headings {
+        border-top: solid;
+        border-color: gray;
+        border-width: 100%;
+    
+        a {
+            font-weight: bold;
+        }
+    }
+}

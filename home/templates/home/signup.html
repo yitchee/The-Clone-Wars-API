@@ -27,7 +27,7 @@
             If you already have a key, visit the <a href="{% host_url 'documentation_view' host 'docs' %}"
                 class="text-blue-500 hover:underline">documentation</a> to see how to use it.
         </div>
-        <div id="app" class="mb-4">
+        <div id="signUpApp" class="mb-4">
             <form id="signup-form" action="{% url 'signup' %}" method="post" @submit="submitForm" ref="signUpForm">
                 {% csrf_token %}
                 <!-- <label for="{{signup_form.email.id_for_label }}">{{ signup_form.email.label }}</label> -->
@@ -42,7 +42,7 @@
             </form>
         </div>
         <div class="italic text-xs text-gray-600">
-            *NOTE: By signing up for a key, you agree to have your email stored by us. It will only be used to send the API key to you.
+            *NOTE: By signing up for a key, you agree to have your email stored by us. It will only be used to send the API key to you and will not be given to any third parties.
         </div>
     </div>
 
@@ -52,9 +52,9 @@
 
 {% block js %}
 <script>
-    var app = new Vue({
+    var signUpApp = new Vue({
         delimiters: ['[[', ']]'],
-        el: '#app',
+        el: '#signUpApp',
         data: {
             email: '',
             bFormSending: false,
