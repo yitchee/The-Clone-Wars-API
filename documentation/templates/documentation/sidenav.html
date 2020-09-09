@@ -1,36 +1,41 @@
-<div id="docs-sidenav" class="sticky bg-red-400" style="top: 1rem;">
-    <div class="mb-2">
+<div id="docs-sidenav" class="sticky bg-red-400 mb-4" :class="showNav ? 'pb-1' : 'pb-0'">
+    <div id="sidenav-current" class="md:block lg:hidden select-none" @click="toggleNav">
+        <div :class="showNav ? 'active' : ''">
+            [[currentLink]]
+        </div>
+    </div>
+    <div class="nav-sections mb-2" :class="showNav ? 'block' : 'hidden'">
         <div class="docs-link-headings">
-            <router-link to="/getting-started">Getting Started</router-link>
+            <router-link to="/" exact :class="highlight ? 'router-link-active' : ''">Getting Started</router-link>
         </div>
         <ul class="ml-4">
-            <li><a href="#introduction">Introduction</a></li>
-            <li><a href="#authentication">Authentication</a></li>
-            <li><a href="#base-url">Base URL</a></li>
-            <li><a href="#request-limits">Request Limits</a></li>
-            <li><a href="#json-schema">JSON Schema</a></li>
-            <li><a href="#searching">Searching</a></li>
+            <li><router-link to="/#introduction">Introduction</router-link></li>
+            <li><router-link to="/#authentication">Authentication</router-link></li>
+            <li><router-link to="/#base-url">Base URL</router-link></li>
+            <li><router-link to="/#request-limits">Request Limits</router-link></li>
+            <li><router-link to="/#json-schema">JSON Schema</router-link></li>
+            <li><router-link to="/#searching">Searching</router-link></li>
         </ul>
     </div>
-    <div class="mb-2">
+    <div class="nav-sections mb-2" :class="showNav ? 'block' : 'hidden'">
         <div class="docs-link-headings">
             <router-link to="/resources">Resources</router-link>
         </div>
         <ul class="ml-4">
-            <li><a href="#characters">Characters</a></li>
-            <li><a href="#planets">Planets</a></li>
-            <li><a href="#species">Species</a></li>
-            <li><a href="#vehicles">Vehicles</a></li>
+            <li><router-link to="/resources#characters">Characters</router-link></li>
+            <li><router-link to="/resources#planets">Planets</router-link></li>
+            <li><router-link to="/resources#species">Species</router-link></li>
+            <li><router-link to="/resources#vehicles">Vehicles</router-link></li>
         </ul>
     </div>
-    <div class="mb-2">
+    <div class="nav-sections mb-2" :class="showNav ? 'block' : 'hidden'">
         <div class="docs-link-headings">
             <router-link to="/try-it-out">Try It Out</router-link>
         </div>
         <ul class="ml-4">
-            <li><a href="#random">Random</a></li>
-            <li><a href="#by-id">By ID</a></li>
-            <li><a href="#search">Search</a></li>
+            <li><router-link to="/try-it-out#random">Random</router-link></li>
+            <li><router-link to="/try-it-out#by-id">By ID</router-link></li>
+            <li><router-link to="/try-it-out#search">Search</router-link></li>
         </ul>
     </div>
 </div>

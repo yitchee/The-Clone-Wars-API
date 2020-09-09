@@ -1,3 +1,6 @@
+html {
+  scroll-behavior: smooth; }
+
 code, pre {
   background-color: #e2e7ec;
   border-radius: .25rem;
@@ -5,15 +8,41 @@ code, pre {
   padding-right: .25rem;
   color: black; }
 
-#docs-sidenav ul a:hover {
-  color: #4280e6; }
-#docs-sidenav .router-link-active {
-  color: green; }
-#docs-sidenav .docs-link-headings {
-  border-top: solid;
-  border-color: gray;
-  border-width: 100%; }
-  #docs-sidenav .docs-link-headings a {
-    font-weight: bold; }
+pre {
+  width: 75%; }
+  @media (max-width: 1280px) {
+    pre {
+      width: 80%; } }
+  @media (max-width: 1024px) {
+    pre {
+      width: 90%; } }
+  @media (max-width: 768px) {
+    pre {
+      width: 100%; } }
+
+#docs-sidenav {
+  top: 1rem; }
+  #docs-sidenav ul a:hover {
+    color: #4280e6; }
+  #docs-sidenav .docs-link-headings {
+    border-top: solid;
+    border-color: gray;
+    border-width: 100%; }
+    #docs-sidenav .docs-link-headings a {
+      font-weight: bold; }
+    #docs-sidenav .docs-link-headings .router-link-active {
+      color: green; }
+  #docs-sidenav .nav-sections a {
+    margin-left: 1rem; }
+  #docs-sidenav #sidenav-current {
+    font-weight: bold;
+    font-size: 1.5rem;
+    cursor: pointer; }
+    #docs-sidenav #sidenav-current div::after {
+      right: 1rem;
+      position: absolute;
+      content: '\002B'; }
+    #docs-sidenav #sidenav-current .active::after {
+      content: '\2212'; }
 
 /*# sourceMappingURL=main.css.map */

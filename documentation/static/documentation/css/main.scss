@@ -1,3 +1,11 @@
+$md-breakpoint: 768px;
+$lg-breakpoint: 1024px;
+$xl-breakpoint: 1280px;
+
+html {
+    scroll-behavior: smooth;
+}
+
 code, pre {
     background-color: #e2e7ec;
     border-radius: .25rem;
@@ -6,22 +14,59 @@ code, pre {
     color: black;
 }
 
+pre {
+    width: 75%;
+    @media (max-width: $xl-breakpoint){
+        width: 80%;
+    }
+    @media (max-width: $lg-breakpoint){
+        width: 90%;
+    }
+    @media (max-width: $md-breakpoint){
+        width: 100%;
+    }
+}
+
 #docs-sidenav {
+    top: 1rem;
+
     ul a:hover {
         color: rgb(66, 128, 230);
-    }
-
-    .router-link-active {
-        color: green;
     }
 
     .docs-link-headings {
         border-top: solid;
         border-color: gray;
         border-width: 100%;
-    
+        
         a {
             font-weight: bold;
+        }
+
+        .router-link-active {
+            color: green;
+        }
+    }
+
+    .nav-sections {
+        a {
+            margin-left: 1rem;
+        }
+    }
+
+    #sidenav-current {
+        font-weight: bold;
+        font-size: 1.5rem;
+        cursor: pointer;
+
+        div::after{
+            right: 1rem;
+            position: absolute;
+            content: '\002B';
+        }
+
+        .active::after {
+            content: '\2212';
         }
     }
 }

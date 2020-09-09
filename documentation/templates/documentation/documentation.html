@@ -10,12 +10,13 @@
 
 
 {% block content %}
-<div id="docs-app" class="w-full bg-red-300 grid grid-cols-5 gap-4 mx-8">
-    <div class="col-span-1 bg-blue-300 pl-2 pt-2">
+<div id="docs-app" class="w-full md:block lg:grid grid-cols-5 gap-4 mx-8">
+    <div class="lg:col-span-1">
         {% include "documentation/sidenav.html" %}
     </div>
-    <div class="col-span-4 bg-green-100 px-2">
+    <div class="lg:col-span-4 bg-green-100 px-2">
         <router-view></router-view>
+
     </div>
 </div>
 {% endblock %}
@@ -31,17 +32,68 @@
 
     const router = new VueRouter({
         mode: 'history',
+        scrollBehavior: function(to, from, savedPosition) {
+            if (to.hash) {
+                return {selector: to.hash}
+            } else {
+                return { x: 0, y: 0 }
+            }
+        },
         routes: [
-            { path: '/', component: GettingStarted },
-            { path: '/getting-started', component: GettingStarted },
-            { path: '/resources', component: Resources },
-            { path: '/try-it-out', component: TryItOut }
+            { path: '/', component: GettingStarted, name: 'Getting Started' },
+            { path: '/resources', component: Resources, name: 'Resources' },
+            { path: '/try-it-out', component: TryItOut, name: 'Try It Out' }
         ]
     });
 
     var docs_app = new Vue({
         router,
         el: '#docs-app',
+        delimiters: ['[[', ']]'],
+        data() {
+            return {
+                highlight: false,
+                currentLink: 'Documentation',
+                showNav: true,
+            }
+        },
+        mounted() {
+            this.updateNavHeader();
+            this.resizeEventHandler();
+        },
+        created() {
+            window.addEventListener("resize", this.resizeEventHandler);
+        },
+        destroyed() {
+            window.removeEventListener("resize", this.resizeEventHandler);
+        },
+        watch: {
+            $route (to, from){
+                if (this.$route.fullPath.includes('/#')) {
+                    this.highlight = true;
+                }
+                else {
+                    this.highlight = false;
+                }
+                this.updateNavHeader();
+            }
+        },
+        methods: {
+            updateNavHeader: function() {
+                this.currentLink = this.$route.name;
+            },
+            resizeEventHandler: function(e) {
+                if (this.showNav && window.innerWidth < 1024) {
+                    this.showNav = false;
+                }
+                else if (!this.showNav && window.innerWidth > 1023){
+                    this.showNav = true;
+                }
+            },
+            toggleNav: function() {
+                this.showNav = !this.showNav;
+            }
+        },
     })
 </script>
 {% endblock %}
