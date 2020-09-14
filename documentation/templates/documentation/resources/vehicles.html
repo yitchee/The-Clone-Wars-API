@@ -1,6 +1,39 @@
-<div id="base-url" class="mb-8">
-    <h1 class="text-2xl mt-2">Vehicles</h1>
-    <div>
-        
+<div id="vehicles" class="mb-8">
+    <h2 class="text-2xl mt-2">Vehicles</h2>
+    <div class="resources-sections">
+        <div>
+            <span class="resources-sections-headings">Endpoints:</span>
+            <ul>
+                <li><code>/vehicles/</code></li>
+                <li><code>/vehicles/:id/</code></li>
+                <li><code>/vehicles/random/</code></li>
+            </ul>
+        </div>
+        <div>
+            <span class="resources-sections-headings">Attributes:</span>
+            <ul>
+                <li><code>id</code> - integer</li>
+                <li><code>name</code> - string</li>
+                <li><code>link</code> - string</li>
+                <li><code>info</code> - object
+                    <ul>
+                        <li><code>gender</code> - string</li>
+                        <li><code>species</code> - string</li>
+                        <li><code>homeworld</code> - string</li>
+                        <li><code>affiliation</code> - array</li>
+                        <li><code>occupation_rank</code> - array</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <span class="resources-sections-headings">Search Fields:</span>
+            <ul>
+                <li><code>name</code></li>
+                <li><code>class</code></li>
+                <li><code>affiliation</code></li>
+                <li><code>manufacturer</code></li>
+            </ul>
+        </div>
     </div>
 </div>

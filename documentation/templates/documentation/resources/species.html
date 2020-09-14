@@ -1,6 +1,42 @@
-<div id="base-url" class="mb-8">
-    <h1 class="text-2xl mt-2">Species</h1>
-    <div>
-        
+<div id="species" class="mb-8">
+    <h2 class="text-2xl mt-2">Species</h2>
+    <div class="resources-sections">
+        <div>
+            <span class="resources-sections-headings">Details:</span>
+            <div>
+                Total number of species: <span class="resource-count">147</span><br>
+                Number with more than just <code>designation</code> defined: <span class="resource-count">104</span><br>
+            </div>
+        </div>
+        <div>
+            <span class="resources-sections-headings">Endpoints:</span>
+            <ul>
+                <li><code>/species/</code></li>
+                <li><code>/species/:id/</code></li>
+                <li><code>/species/random/</code></li>
+            </ul>
+        </div>
+        <div>
+            <span class="resources-sections-headings">Attributes:</span>
+            <ul>
+                <li><code>id</code> - integer</li>
+                <li><code>name</code> - string</li>
+                <li><code>link</code> - string</li>
+                <li><code>info</code> - object
+                    <ul>
+                        <li><code>designation</code><span class="attribute-type">string</span><span class="description">the type of sentience of a species ['Sentient', 'Non-Sentient', 'Semi-Sentient', 'Undefined'] <span class="resource-count">147</span></span></li>
+                        <li><code>homeworld</code><span class="attribute-type">array</span><span class="description">a list of places that the speices are from <span class="resource-count">97</span></span></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <span class="resources-sections-headings">Search Fields:</span>
+            <ul>
+                <li><code>name</code></li>
+                <li><code>designation</code><span class="description">must be exact: 'Sentient' / 'Non-Sentient' / 'Semi-Sentient' / 'Undefined' </li>
+                <li><code>homeworld</code></li>
+            </ul>
+        </div>
     </div>
 </div>

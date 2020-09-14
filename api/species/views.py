@@ -28,6 +28,7 @@ def index(request):
 
     name = request.GET.get('name', None)
     designation = request.GET.get('designation', None)
+    homeworld = request.GET.get('homeworld', None)
     page = int(request.GET.get('page', 0))
 
     species_set = Species.objects.all().order_by('id')
@@ -37,6 +38,10 @@ def index(request):
     if designation:
         # Avaliable Options : 'Sentient', 'Non-Sentient', 'Semi-Sentient', 'Undefined'
         species_set = species_set.filter(info__designation__iexact=designation)
+
+    if homeworld:
+        # Avaliable Options : 'Sentient', 'Non-Sentient', 'Semi-Sentient', 'Undefined'
+        species_set = species_set.filter(info__homeworld__icontains=homeworld)
 
     if page:
         start = settings.RESOURCE_LIMIT*(page-1)

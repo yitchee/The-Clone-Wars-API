@@ -1,9 +1,68 @@
-<div>
+<div id="resources">
     <h1 class="text-3xl font-semibold">Resources</h1>
     <div class="divide-y divide-gray-500">
         {% include "documentation/resources/characters.html" %}
         {% include "documentation/resources/planets.html" %}
         {% include "documentation/resources/species.html" %}
         {% include "documentation/resources/vehicles.html" %}
+        <div class="mb-8">
+            <h2 class="text-xl mt-2">Note *</h2>
+            <div>
+                Search values do not have to be exact, the API will return anything that contains the value given in the query.<br>
+                For example, <code>https://api.clonewarsapi.com/characters/?<span style="color: blue;">name</span>=<span style="color: red;">sky</span></code> will get the following:
+                <pre>
+[
+    {
+        "id": 18,
+        "name": "Anakin <span style="color: red;">Sky</span>walker",
+        "link": "https://clonewars.fandom.com/wiki/Anakin_Skywalker",
+        "info": {
+            "gender": "Male",
+            "species": "Human",
+            "homeworld": "Tatooine",
+            "affiliation": [
+                "Jedi Order (formerly)",
+                "Jedi High Council (formerly)",
+                "Galactic Republic (formerly)",
+                "GAR (Grand Army of the Republic)",
+                "501st Legion",
+                "Sith Order",
+                "Darth Sidious",
+                "Galactic Empire"
+            ],
+            "occupation_rank": [
+                "Slave (formerly)",
+                "Jedi Padawan (formerly)",
+                "Jedi Knight (formerly)",
+                "Jedi General (formerly)",
+                "Member of the Jedi High Council (formerly)",
+                "Sith Lord and Apprentice of Darth Sidious",
+                "Second-in-Command and Supreme Commander of the Imperial Military",
+                "Second Dark Lord of the Sith"
+            ]
+        }
+    },
+    {
+        "id": 521,
+        "name": "Shmi <span style="color: red;">Sky</span>walker",
+        "link": "https://clonewars.fandom.com/wiki/Shmi_Skywalker",
+        "info": {
+            "gender": "Female",
+            "species": "Human",
+            "homeworld": "Tatooine",
+            "affiliation": [
+                "Gardulla the Hutt (formerly)",
+                "Watto's shop (formerly)"
+            ],
+            "occupation_rank": [
+                "Slave (formerly)",
+                "Moisture farmer"
+            ]
+        }
+    }
+]
+                </pre>
+            </div>
+        </div>
     </div>
 </div>

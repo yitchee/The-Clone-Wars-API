@@ -1,6 +1,48 @@
-<div id="base-url" class="mb-8">
-    <h1 class="text-2xl mt-2">Characters</h1>
-    <div>
-        
+<div id="characters" class="mb-8">
+    <h2 class="text-2xl mt-2">Characters</h2>
+    <div class="resources-sections">
+        <div>
+            <span class="resources-sections-headings">Details:</span>
+            <div>
+                Total number of characters: <span class="resource-count">787</span><br>
+                Number with <code>info</code>: <span class="resource-count">752</span><br>
+            </div>
+        </div>
+        <div>
+            <span class="resources-sections-headings">Endpoints:</span>
+            <ul>
+                <li><code>/characters/</code><span class="description">gets a list of characters matching given queries</span></li>
+                <li><code>/characters/:id/</code><span class="description">gets a specific character with given ID</span></li>
+                <li><code>/characters/random/</code><span class="description">gets a random characters from the database</span></li>
+            </ul>
+        </div>
+        <div>
+            <span class="resources-sections-headings">Attributes:</span>
+            <ul>
+                <li><code>id</code><span class="attribute-type">integer</span><span class="description">ID of the character <span class="resource-count">787</span></span></li>
+                <li><code>name</code><span class="attribute-type">string</span><span class="description">name of the character <span class="resource-count">787</span></span></li>
+                <li><code>link</code><span class="attribute-type">string</span><span class="description">link to character's wiki page <span class="resource-count">787</span></span></li>
+                <li><code>info</code><span class="attribute-type">object</span><span class="description">more information about the character <span class="resource-count">752</span></span>
+                    <ul>
+                        <li><code>gender</code><span class="attribute-type">string</span><span class="description">character's gender (programming gender for droids) <span class="resource-count">737</span></span></li>
+                        <li><code>species</code><span class="attribute-type">string</span><span class="description">the species of a character <span class="resource-count">703</span></span></li>
+                        <li><code>homeworld</code><span class="attribute-type">string</span><span class="description">character's homeworld <span class="resource-count">652</span></span></li>
+                        <li><code>affiliation</code><span class="attribute-type">array</span><span class="description">a list of the character's current and previous affiliations <span class="resource-count">734</span></span></li>
+                        <li><code>occupation_rank</code><span class="attribute-type">array</span><span class="description">a list of the character's current and previous ranks/occupation <span class="resource-count">686</span></span></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <span class="resources-sections-headings">Search Fields:</span>
+            
+            <ul>
+                <li><code>name</code></li>
+                <li><code>species</code></li>
+                <li><code>gender</code><span class="description">['Male', 'Female', 'Male Programming', 'Female Programming']</span></li>
+                <li><code>affiliation</code></li>
+                <li><code>occupation</code></li>
+            </ul>
+        </div>
     </div>
 </div>

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html {
   scroll-behavior: smooth; }
 
@@ -21,20 +22,20 @@ pre {
       width: 100%; } }
 
 #docs-sidenav {
+  border-radius: .5rem;
   top: 1rem; }
   #docs-sidenav ul a:hover {
     color: #4280e6; }
-  #docs-sidenav .docs-link-headings {
-    border-top: solid;
-    border-color: gray;
-    border-width: 100%; }
-    #docs-sidenav .docs-link-headings a {
-      font-weight: bold; }
-    #docs-sidenav .docs-link-headings .router-link-active {
-      color: green; }
+  #docs-sidenav .docs-link-headings a {
+    font-weight: bold; }
+  #docs-sidenav .docs-link-headings .router-link-active {
+    color: green; }
   #docs-sidenav .nav-sections a {
     margin-left: 1rem; }
   #docs-sidenav #sidenav-current {
+    background-color: #4747ec;
+    border-radius: inherit;
+    padding: .5rem;
     font-weight: bold;
     font-size: 1.5rem;
     cursor: pointer; }
@@ -42,7 +43,34 @@ pre {
       right: 1rem;
       position: absolute;
       content: '\002B'; }
-    #docs-sidenav #sidenav-current .active::after {
+    #docs-sidenav #sidenav-current div.active::after {
       content: '\2212'; }
+    #docs-sidenav #sidenav-current.active {
+      border-bottom-left-radius: 0rem;
+      border-bottom-right-radius: 0rem; }
+
+#docs-content #resources h2 {
+  font-weight: 700; }
+#docs-content #resources .resources-sections div {
+  margin-bottom: 1rem; }
+  #docs-content #resources .resources-sections div .resources-sections-headings {
+    font-weight: 600; }
+#docs-content #resources .resources-sections .attribute-type {
+  font-style: italic; }
+  #docs-content #resources .resources-sections .attribute-type::before {
+    content: ' --- '; }
+#docs-content #resources .resources-sections .resource-count {
+  color: red; }
+#docs-content #resources ul {
+  margin-left: .5rem; }
+  #docs-content #resources ul ul {
+    margin-left: 2rem; }
+  #docs-content #resources ul .description::before {
+    content: ' --- '; }
+  #docs-content #resources ul li:before {
+    content: '·';
+    font-size: 24px;
+    vertical-align: middle;
+    line-height: 0px; }
 
 /*# sourceMappingURL=main.css.map */

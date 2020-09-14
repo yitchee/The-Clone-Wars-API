@@ -1,6 +1,64 @@
-<div id="base-url" class="mb-8">
-    <h1 class="text-2xl mt-2">Planets</h1>
-    <div>
-        
+<div id="planets" class="mb-8">
+    <h2 class="text-2xl mt-2">Planets</h2>
+    <div class="resources-sections">
+        <div>
+            <span class="resources-sections-headings">Details:</span>
+            <div>
+                Number of planets: <span class="resource-count">105</span><br>
+                Number with <code>info</code>: <span class="resource-count">100</span><br>
+            </div>
+        </div>
+        <div>
+            <span class="resources-sections-headings">Endpoints:</span>
+            <ul>
+                <li><code>/planets/</code><span class="description">gets a list of planets matching the given queries</span></li>
+                <li><code>/planets/:id/</code><span class="description">gets a specific planet with the given ID</span></li>
+                <li><code>/planets/random/</code><span class="description">gets a random planet from the database</span></li>
+            </ul>
+        </div>
+        <div>
+            <span class="resources-sections-headings">Attributes:</span>
+            <ul>
+                <li><code>id</code><span class="attribute-type">integer</span><span class="description">ID of the planet <span class="resource-count">105</span></span></span></li>
+                <li><code>name</code><span class="attribute-type">string</span><span class="description">name of the planet <span class="resource-count">105</span></span></span></li>
+                <li><code>link</code><span class="attribute-type">string</span><span class="description">link to planet's wiki page <span class="resource-count">105</span></span></span></li>
+                <li><code>info</code><span class="attribute-type">object</span><span class="description">more information about the planet <span class="resource-count">100</span></span></span>
+                    <ul>
+                        <li><code>affiliation</code><span class="attribute-type">array</span><span class="description">a list of the planet's affiliations <span class="resource-count">91</span></span></li>
+                        <li><code>atmosphere</code><span class="attribute-type">string</span><span class="description">a description of the planet's atmosphere <span class="resource-count">17</span></span></li>
+                        <li><code>class</code><span class="attribute-type">string</span><span class="description">the type of the planet <span class="resource-count">53</span></span></li>
+                        <li><code>climate</code><span class="attribute-type">string</span><span class="description">the type of climate found on the planet <span class="resource-count">50</span></span></li>
+                        <li><code>demonym</code><span class="attribute-type">array</span><span class="description">a list of words used for the inhabitants of the planet <span class="resource-count">11</span></span></li>
+                        <li><code>diameter</code><span class="attribute-type">string</span><span class="description">the diameter of the planet <span class="resource-count">9</span></span></li>
+                        <li><code>fauna</code><span class="attribute-type">string</span><span class="description">a list of animals on the planet <span class="resource-count">11</span></span></li>
+                        <li><code>government</code><span class="attribute-type">array</span><span class="description">names/types of government on the planet <span class="resource-count">11</span></span></li>
+                        <li><code>immigrated_species</code><span class="attribute-type">array</span><span class="description">a list of species that immigrated to the planet <span class="resource-count">34</span></span></li>
+                        <li><code>language</code><span class="attribute-type">array</span><span class="description">a list of languages spoken on the planet <span class="resource-count">12</span></span></li>
+                        <li><code>major_exports</code><span class="attribute-type">array</span><span class="description">a list the planet's major exports <span class="resource-count">9</span></span></li>
+                        <li><code>major_imports</code><span class="attribute-type">array</span><span class="description">a list the planet's major imports <span class="resource-count">6</span></span></li>
+                        <li><code>major_settlement</code><span class="attribute-type">array</span><span class="description">a list the planet's major settlements <span class="resource-count">33</span></span></li>
+                        <li><code>moon</code><span class="attribute-type">string</span><span class="description">the number of moons and their names (if known) <span class="resource-count">35</span></span></li>
+                        <li><code>native_species</code><span class="attribute-type">array</span><span class="description">a list of the planet's native species <span class="resource-count">52</span></span></li>
+                        <li><code>orbital_period</code><span class="attribute-type">string</span><span class="description">time for a planet to orbit around its sun <span class="resource-count">8</span></span></li>
+                        <li><code>points_of_interest</code><span class="attribute-type">array</span><span class="description">some known locations on the planet <span class="resource-count">48</span></span></li>
+                        <li><code>population</code><span class="attribute-type">string</span><span class="description">population of a planet and the composition <span class="resource-count">8</span></span></li>
+                        <li><code>primary_terrain</code><span class="attribute-type">array</span><span class="description">a list the planet's most common terrain <span class="resource-count">82</span></span></li>
+                        <li><code>rotation_period</code><span class="attribute-type">string</span><span class="description">time for a planet to complete one rotation <span class="resource-count">8</span></span></li>
+                        <li><code>region</code><span class="attribute-type">string</span><span class="description">the region of the galaxy a planet is located <span class="resource-count">89</span></span></li>
+                        <li><code>sector</code><span class="attribute-type">string</span><span class="description">the sector of a region that a planet is located <span class="resource-count">55</span></span></li>
+                        <li><code>system</code><span class="attribute-type">string</span><span class="description">the system a planet is located <span class="resource-count">65</span></span></li>
+                        <li><code>sun</code><span class="attribute-type">string</span><span class="description">the number of suns and their names (if known) <span class="resource-count">19</span></span></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <span class="resources-sections-headings">Search Fields:</span>
+            <ul>
+                <li><code>name</code></li>
+                <li><code>affiliation</code></li>
+                <li><code>region</code></li>
+            </ul>
+        </div>
     </div>
 </div>

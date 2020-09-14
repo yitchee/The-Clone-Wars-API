@@ -1,10 +1,10 @@
 <div id="docs-sidenav" class="sticky bg-red-400 mb-4" :class="showNav ? 'pb-1' : 'pb-0'">
-    <div id="sidenav-current" class="md:block lg:hidden select-none" @click="toggleNav">
+    <div id="sidenav-current" class="md:block lg:hidden select-none" @click="toggleNav" :class="showNav ? 'active' : ''">
         <div :class="showNav ? 'active' : ''">
             [[currentLink]]
         </div>
     </div>
-    <div class="nav-sections mb-2" :class="showNav ? 'block' : 'hidden'">
+    <div class="nav-sections mb-2 pt-2" :class="showNav ? 'block' : 'hidden'">
         <div class="docs-link-headings">
             <router-link to="/" exact :class="highlight ? 'router-link-active' : ''">Getting Started</router-link>
         </div>
@@ -15,6 +15,7 @@
             <li><router-link to="/#request-limits">Request Limits</router-link></li>
             <li><router-link to="/#json-schema">JSON Schema</router-link></li>
             <li><router-link to="/#searching">Searching</router-link></li>
+            <li><router-link to="/#pages">Pages</router-link></li>
         </ul>
     </div>
     <div class="nav-sections mb-2" :class="showNav ? 'block' : 'hidden'">

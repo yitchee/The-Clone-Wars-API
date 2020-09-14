@@ -10,13 +10,12 @@
 
 
 {% block content %}
-<div id="docs-app" class="w-full md:block lg:grid grid-cols-5 gap-4 mx-8">
+<div id="docs-app" class="w-full md:block lg:grid grid-cols-5 gap-4 p-2 lg:p-0 mx-4 lg:mx-8 xl:mx-20">
     <div class="lg:col-span-1">
         {% include "documentation/sidenav.html" %}
     </div>
-    <div class="lg:col-span-4 bg-green-100 px-2">
+    <div id="docs-content" class="lg:col-span-4 bg-green-100 px-2">
         <router-view></router-view>
-
     </div>
 </div>
 {% endblock %}
@@ -55,6 +54,7 @@
                 highlight: false,
                 currentLink: 'Documentation',
                 showNav: true,
+                windowSizeChanged: false,
             }
         },
         mounted() {
@@ -63,19 +63,14 @@
         },
         created() {
             window.addEventListener("resize", this.resizeEventHandler);
+            this.highlighLink();
         },
         destroyed() {
             window.removeEventListener("resize", this.resizeEventHandler);
         },
         watch: {
             $route (to, from){
-                if (this.$route.fullPath.includes('/#')) {
-                    this.highlight = true;
-                }
-                else {
-                    this.highlight = false;
-                }
-                this.updateNavHeader();
+                this.highlighLink();
             }
         },
         methods: {
@@ -92,6 +87,15 @@
             },
             toggleNav: function() {
                 this.showNav = !this.showNav;
+            },
+            highlighLink: function() {
+                if (this.$route.fullPath.includes('/#')) {
+                    this.highlight = true;
+                }
+                else {
+                    this.highlight = false;
+                }
+                this.updateNavHeader();
             }
         },
     })
