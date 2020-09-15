@@ -10,6 +10,7 @@ code, pre {
   color: black; }
 
 pre {
+  overflow: auto;
   width: 75%; }
   @media (max-width: 1280px) {
     pre {
@@ -72,5 +73,26 @@ pre {
     font-size: 24px;
     vertical-align: middle;
     line-height: 0px; }
+#docs-content .search-options {
+  display: inline;
+  word-wrap: none;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+  #docs-content .search-options:hover {
+    color: #4280e6;
+    fill: #4280e6; }
+  #docs-content .search-options .dropdown-icon {
+    display: inline;
+    margin-left: -.3rem; }
+    #docs-content .search-options .dropdown-icon.more {
+      vertical-align: text-top; }
+    #docs-content .search-options .dropdown-icon.less {
+      vertical-align: text-bottom; }
+    #docs-content .search-options .dropdown-icon.show {
+      display: inline; }
+    #docs-content .search-options .dropdown-icon.hide {
+      display: none; }
 
 /*# sourceMappingURL=main.css.map */

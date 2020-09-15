@@ -10,12 +10,14 @@
 
 
 {% block content %}
-<div id="docs-app" class="w-full md:block lg:grid grid-cols-5 gap-4 p-2 lg:p-0 mx-4 lg:mx-8 xl:mx-20">
+<div id="docs-app" class="w-full md:block lg:grid grid-cols-5 gap-4 px-2 md:px-0 md:mx-4 lg:mx-8 xl:mx-20">
     <div class="lg:col-span-1">
         {% include "documentation/sidenav.html" %}
     </div>
     <div id="docs-content" class="lg:col-span-4 bg-green-100 px-2">
-        <router-view></router-view>
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
     </div>
 </div>
 {% endblock %}
@@ -24,9 +26,27 @@
 {% block js %}
 <!-- <script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.min.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.js"></script>
-<script>
+<script defer>
     const GettingStarted = { template: `{% include "documentation/getting_started/getting_started.html" %}` };
-    const Resources = { template: `{% include "documentation/resources/resources.html" %}` };
+
+    const Resources = { 
+        template: `{% include "documentation/resources/resources.html" %}`,
+        data() {
+            return {
+                showVehiclesClass: false,
+                showVehiclesManufacturer: false,
+            }
+        },
+        methods: {
+            toggleShowVehiclesClass: function () {
+                this.showVehiclesClass = !this.showVehiclesClass;
+            },
+            toggleShowVehiclesManufacturer: function () {
+                this.showVehiclesManufacturer = !this.showVehiclesManufacturer;
+            },
+        },
+    };
+
     const TryItOut = { template: `{% include "documentation/try_it_out/try_it_out.html" %}` };
 
     const router = new VueRouter({
@@ -55,6 +75,7 @@
                 currentLink: 'Documentation',
                 showNav: true,
                 windowSizeChanged: false,
+                loadedVehilcesApp: false,
             }
         },
         mounted() {
@@ -96,7 +117,7 @@
                     this.highlight = false;
                 }
                 this.updateNavHeader();
-            }
+            },
         },
     })
 </script>
