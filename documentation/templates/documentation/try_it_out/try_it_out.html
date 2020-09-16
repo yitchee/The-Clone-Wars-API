@@ -1,8 +1,26 @@
-<div>
+<section id="try-it-out">
     <h1 class="text-3xl font-semibold">Try It Out</h1>
     <div class="divide-y divide-gray-500">
+        <div class="flex flex-wrap mb-4">
+            <button class="demo-resource-btn" v-on:click="setCurrentResource('characters')" 
+                :class=" currentResource == 'characters' ? 'active-demo-resource-btn' : '' ">
+                Characters
+            </button>
+            <button class="demo-resource-btn" v-on:click="setCurrentResource('planets')" 
+                :class=" currentResource == 'planets' ? 'active-demo-resource-btn' : '' ">
+                Planets
+            </button>
+            <button class="demo-resource-btn" v-on:click="setCurrentResource('species')" 
+                :class=" currentResource == 'species' ? 'active-demo-resource-btn' : '' ">
+                Species
+            </button>
+            <button class="demo-resource-btn" v-on:click="setCurrentResource('vehicles')" 
+                :class=" currentResource == 'vehicles' ? 'active-demo-resource-btn' : '' ">
+                Vehicles
+            </button>
+        </div>
         {% include "documentation/try_it_out/by_id.html" %}
         {% include "documentation/try_it_out/random.html" %}
         {% include "documentation/try_it_out/search.html" %}
     </div>
-</div>
+</section>

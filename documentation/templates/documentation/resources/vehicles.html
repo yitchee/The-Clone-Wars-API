@@ -1,4 +1,4 @@
-<div id="vehicles" class="mb-8">
+<section id="vehicles" class="mb-8">
     <h2 class="text-2xl mt-2">Vehicles</h2>
     <div class="resources-sections">
         <div>
@@ -49,9 +49,9 @@
                             <path d=" M 527 323C 527 323 727 523 727 523C 737 534 740 550 735 564C 729 578 715 587 700 588C 700 588 300 588 300 588C 285 587 271 578 265 564C 260 550 263 534 273 523C 273 523 473 323 473 323C 480 317 490 313 499 313C 510 312 519 316 527 323C 527 323 527 323 527 323"/>
                         </svg> 
                     </div>
-                    <span class="mb-8" v-bind:class="{ hidden: !showVehiclesClass, '': showVehiclesClass }"><br>
-                        'Starfighter', 'Freighter', 'Walker', 'Star Destroyer', 'Unknown', 'Tank', 'Gunship', 'Frigate', 'Transport', 'Cruiser', 'Flagship', 
-                        'Shuttle', 'Speeder', 'Capital Ship', 'Battleship', 'Repulsorcraft' ,'Vessel', 'Dreadnaught', 'Carrier'
+                    <span class="search-options-list" v-bind:class="{ hidden: !showVehiclesClass, 'visible': showVehiclesClass }">
+                        'Battleship' , 'Capital Ship' , 'Carrier' , 'Cruiser' , 'Dreadnaught' , 'Flagship' , 'Freighter' , 'Frigate' , 'Gunship' , 'Repulsorcraft' , 'Shuttle' , 
+                        'Speeder' , 'Star Destroyer' , 'Starfighter' , 'Tank' , 'Transport' , 'Unknown' , 'Vessel' , 'Walker'
                     </span>
                 </li>
                 <li><code>affiliation</code></li>
@@ -66,13 +66,13 @@
                             <path d=" M 527 323C 527 323 727 523 727 523C 737 534 740 550 735 564C 729 578 715 587 700 588C 700 588 300 588 300 588C 285 587 271 578 265 564C 260 550 263 534 273 523C 273 523 473 323 473 323C 480 317 490 313 499 313C 510 312 519 316 527 323C 527 323 527 323 527 323"/>
                         </svg> 
                     </div>
-                    <span class="" v-bind:class="{ hidden: !showVehiclesManufacturer, '': showVehiclesManufacturer }"><br>
-                        'Rothana Heavy Engineering', 'Kuat Drive Yards', 'Kuat Systems Engineering', 'Hoar Chall Engineering', 'Unknown', 'Umbarans', 'Slayn & Korpil', 'Gallofree Yards', 
-                        'Hoersch-Kessel Drive, Inc.', 'Zygerrian Slave Empire', 'Corellian Engineering', 'Quarren', 'MandalMotors', 'Techno Union', 'Baktoid Armor Workshop', 'Botajef Shipyards', 
-                        'Lantillian ShipWrights', 'Huppla Pasa Tisc Shipwrights Collective', 'SoroSuub Corporation', 'Cygnus Spaceworks', 'Trade Federation', 'Kalevala Spaceworks'
+                    <span class="search-options-list" v-bind:class="{ hidden: !showVehiclesManufacturer, 'visible': showVehiclesManufacturer }">
+                        'Baktoid Armor Workshop' , 'Botajef Shipyards' , 'Corellian Engineering' , 'Cygnus Spaceworks' , 'Hoar Chall Engineering' , 'Hoersch-Kessel Drive, Inc.' , 'Huppla Pasa Tisc Shipwrights Collective' , 
+                        'Gallofree Yards' , 'Kalevala Spaceworks' , 'Kuat Drive Yards' , 'Kuat Systems Engineering' , 'Lantillian ShipWrights' , 'MandalMotors' , 'Quarren' , 'Rothana Heavy Engineering' , 'Slayn & Korpil' , 
+                        'SoroSuub Corporation' , 'Techno Union' , 'Trade Federation' , 'Umbarans' , 'Unknown' , 'Zygerrian Slave Empire'
                     </span>
                 </li>
             </ul>
         </div>
     </div>
-</div>
+</section>

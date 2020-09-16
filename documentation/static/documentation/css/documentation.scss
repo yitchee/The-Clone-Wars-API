@@ -126,6 +126,24 @@ pre {
         }
     }
 
+    .search-options-list {
+        background-color: white;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+        border-radius: .5rem;
+        border-color: red;
+        border-width: 1px;
+        border-style: solid;
+
+        &.visible {
+            display: block;
+        }
+    }
+
     .search-options {
         display: inline;
         word-wrap: none;
@@ -133,6 +151,7 @@ pre {
         -webkit-user-select: none;
         -ms-user-select: none;
         user-select: none;
+        
         
         &:hover {
             color: #4280e6;
@@ -159,4 +178,44 @@ pre {
             }
         }
     }
+
+    #try-it-out {
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        .demo-resource-btn {
+            margin-top: .5rem;
+            margin-right: .5rem;
+            font-weight: bold;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            padding-top: .5rem;
+            padding-bottom: .5rem;
+            border-style: solid;
+            border-width: 1px;
+            border-color: black;
+            border-radius: .25rem;
+            font-size: 1.5rem;
+
+            &:hover {
+                background-color: rgb(39, 39, 39);
+                color: white;
+            }
+
+            &.active-demo-resource-btn {
+                color: #FFDE06;
+                background-color: black;
+                border-color: black;
+            }
+        }
+    }
+    
 }

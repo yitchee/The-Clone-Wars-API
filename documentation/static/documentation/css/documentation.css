@@ -73,6 +73,20 @@ pre {
     font-size: 24px;
     vertical-align: middle;
     line-height: 0px; }
+#docs-content .search-options-list {
+  background-color: white;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  border-radius: .5rem;
+  border-color: red;
+  border-width: 1px;
+  border-style: solid; }
+  #docs-content .search-options-list.visible {
+    display: block; }
 #docs-content .search-options {
   display: inline;
   word-wrap: none;
@@ -94,5 +108,33 @@ pre {
       display: inline; }
     #docs-content .search-options .dropdown-icon.hide {
       display: none; }
+#docs-content #try-it-out {
+  /* Firefox */ }
+  #docs-content #try-it-out input::-webkit-outer-spin-button,
+  #docs-content #try-it-out input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; }
+  #docs-content #try-it-out input[type=number] {
+    -moz-appearance: textfield; }
+  #docs-content #try-it-out .demo-resource-btn {
+    margin-top: .5rem;
+    margin-right: .5rem;
+    font-weight: bold;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    border-radius: .25rem;
+    font-size: 1.5rem; }
+    #docs-content #try-it-out .demo-resource-btn:hover {
+      background-color: #272727;
+      color: white; }
+    #docs-content #try-it-out .demo-resource-btn.active-demo-resource-btn {
+      color: #FFDE06;
+      background-color: black;
+      border-color: black; }
 
-/*# sourceMappingURL=main.css.map */
+/*# sourceMappingURL=documentation.css.map */

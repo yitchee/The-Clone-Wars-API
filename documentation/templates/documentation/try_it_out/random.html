@@ -1,6 +1,9 @@
-<div id="base-url" class="mb-8">
+<section id="demo-random" class="mb-8">
     <h2 class="text-2xl mt-2">Random</h2>
     <div>
-        
+        <button v-on:click="getRandom" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Get Random
+        </button>
+        <pre v-text="randomData" v-if="randomData" class="mt-2 p-2"></pre>
     </div>
-</div>
+</section>

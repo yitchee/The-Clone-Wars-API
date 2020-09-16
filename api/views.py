@@ -83,7 +83,7 @@ class BaseIdView(ApiKeyCheckMixin, APIView):
         try:
             data = self.model.objects.get(id=id)
         except:
-            return Response({"error": MSG_404}, status=404)
+            return Response({"error": MSG_404}, status=404, headers=CORS_HEADERS)
 
         serializer = self.Serializer(data, many=False)
         return Response(serializer.data, headers=CORS_HEADERS)

@@ -1,4 +1,4 @@
-<div id="docs-sidenav" class="sticky bg-red-400 mb-4" :class="showNav ? 'pb-1' : 'pb-0'">
+<aside id="docs-sidenav" class="sticky bg-red-400 mb-4" :class="showNav ? 'pb-1' : 'pb-0'">
     <div id="sidenav-current" class="md:block lg:hidden select-none" @click="toggleNav" :class="showNav ? 'active' : ''">
         <div :class="showNav ? 'active' : ''">
             [[currentLink]]
@@ -34,9 +34,9 @@
             <router-link to="/try-it-out">Try It Out</router-link>
         </div>
         <ul class="ml-4">
-            <li><router-link to="/try-it-out#random">Random</router-link></li>
             <li><router-link to="/try-it-out#by-id">By ID</router-link></li>
+            <li><router-link to="/try-it-out#random">Random</router-link></li>
             <li><router-link to="/try-it-out#search">Search</router-link></li>
         </ul>
     </div>
-</div>
+</aside>

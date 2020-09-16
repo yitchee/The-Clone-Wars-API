@@ -4,8 +4,11 @@
 
 {% block head %}
 <title>Documentation | The Clone Wars API</title>
-<link rel="stylesheet" type="text/css" href="{% static 'documentation/css/main.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'documentation/css/documentation.css' %}" />
 <script src="https://unpkg.com/vue-router/dist/vue-router.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"
+    integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg=="
+    crossorigin="anonymous"></script>
 {% endblock %}
 
 
@@ -14,7 +17,7 @@
     <div class="lg:col-span-1">
         {% include "documentation/sidenav.html" %}
     </div>
-    <div id="docs-content" class="lg:col-span-4 bg-green-100 px-2">
+    <div id="docs-content" class="lg:col-span-4 bg-green-100 px-2 pb-1">
         <keep-alive>
             <router-view></router-view>
         </keep-alive>
@@ -47,7 +50,40 @@
         },
     };
 
-    const TryItOut = { template: `{% include "documentation/try_it_out/try_it_out.html" %}` };
+    const TryItOut = { 
+        template: `{% include "documentation/try_it_out/try_it_out.html" %}`,
+        data() {
+            return {
+                currentResource: 'characters',
+                resourceId: 12,
+                idData: null,
+                randomData: null,
+            }
+        },
+        mounted() {
+            
+        },
+        methods: {
+            getById: function() {
+                axios.get(this.generateGetUrl(this.resourceId))
+                    .then(result => this.idData = JSON.stringify(result.data, undefined, 2))
+                    .catch(error => this.idData = JSON.stringify(error.response.data, undefined, 2));
+            },
+            getRandom: function() {
+                axios.get(this.generateGetUrl('random'))
+                    .then(result => this.randomData = JSON.stringify(result.data, undefined, 2));
+            },
+            generateGetUrl: function(val) {
+                let url = 'http://api.clonewarsapi.com/';
+                url += this.currentResource + '/' + val;
+                console.log(url)
+                return url;
+            },
+            setCurrentResource: function(val) {
+                this.currentResource = val;
+            }
+        },
+    };
 
     const router = new VueRouter({
         mode: 'history',
