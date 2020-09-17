@@ -31,7 +31,7 @@ def index(request):
     gender = request.GET.get('gender', None)
     occupation = request.GET.get('occupation', None)
     affiliation = request.GET.get('affiliation', None)
-    page = int(request.GET.get('page', 0))
+    page = request.GET.get('page', 0)
 
     characters_set = Character.objects.all().order_by('id')
     if name:
@@ -50,6 +50,10 @@ def index(request):
         characters_set = characters_set.filter(info__affiliation__icontains=affiliation)
 
     if page:
+        try:
+            page = int(page)
+        except:
+            page = 1;
         start = settings.RESOURCE_LIMIT*(page-1)
         end = settings.RESOURCE_LIMIT*(page-1)+settings.RESOURCE_LIMIT
         characters_set = characters_set[start:end]

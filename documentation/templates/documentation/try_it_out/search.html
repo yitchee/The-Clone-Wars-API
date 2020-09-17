@@ -1,6 +1,32 @@
 <section id="demo-search" class="mb-8">
     <h2 class="text-2xl mt-2">Search</h2>
     <div>
-        
+        <div v-for="(field, index) in currentResourceFields" :key="index">
+            <div class="flex flex-wrap items-stretch w-full mb-2 relative">
+                <div class="flex w-32 rounded rounded-r-none border border-r-0 border-grey-light bg-gray-200">
+                    <span
+                        class="flex items-center pl-2 whitespace-no-wrap text-grey-dark text-sm" v-text="field"></span>
+                </div>
+                <input type="text" v-model="fields[field]" v-on:keyup.enter="getSearch"
+                    class="flex-shrink flex-grow flex-auto w-px flex-1 border py-2 px-4 border-grey-light rounded-lg rounded-l-none relative">
+            </div>
+        </div>
+        <div class="flex flex-wrap items-stretch w-full mb-2 relative">
+            <div class="flex w-32 rounded rounded-r-none border border-r-0 border-grey-light bg-gray-200">
+                <span
+                    class="flex items-center pl-2 whitespace-no-wrap text-grey-dark text-sm" v-text="'page'"></span>
+            </div>
+            <input type="number" v-model="resourcePage" v-on:keyup.enter="getSearch"
+                class="flex-shrink flex-grow flex-auto w-px flex-1 border py-2 px-4 border-grey-light rounded-lg rounded-l-none relative">
+        </div>
+        <button v-on:click="getSearch" 
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Search
+        </button>
+        <button v-on:click="resetInputs" type="reset"
+            class="bg-gray-100 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded">
+            Reset
+        </button>
+        <pre id="demo-search-result" v-text="searchData" v-if="searchData" class="mt-2 p-2"></pre>
     </div>
 </section>

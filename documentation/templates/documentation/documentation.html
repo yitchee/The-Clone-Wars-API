@@ -58,10 +58,28 @@
                 resourceId: 12,
                 idData: null,
                 randomData: null,
+                searchData:null,
+                charactersFields: ['name', 'affiliation', 'gender', 'occupation', 'species'],
+                planetsFields: ['name', 'affiliation', 'region'],
+                speciesFields: ['name', 'designation', 'homeworld'],
+                vehiclesFields: ['name', 'affiliation', 'class', 'manufacturer'],
+                fields: {
+                    name: '',
+                    affiliation: '',
+                    class: '',
+                    designation: '',
+                    gender: '',
+                    homeworld: '',
+                    manufacturer: '',
+                    occupation: '',
+                    region: '',
+                    species: '',
+                },
+                resourcePage: '',
             }
         },
         mounted() {
-            
+
         },
         methods: {
             getById: function() {
@@ -71,16 +89,64 @@
             },
             getRandom: function() {
                 axios.get(this.generateGetUrl('random'))
-                    .then(result => this.randomData = JSON.stringify(result.data, undefined, 2));
+                    .then(result => this.randomData = JSON.stringify(result.data, undefined, 2))
+                    .catch(error => this.randomData = JSON.stringify(error.response.data, undefined, 2));
+            },
+            getSearch: function() {
+                let query = '?';
+
+                this.currentResourceFields.forEach(field => {
+                    if (this.fields[field].trim()) {
+                        query += `${field}=${this.fields[field]}&`;
+                    }
+                });
+                
+                if (this.resourcePage) {
+                    query += `page=${this.resourcePage}`;
+                }
+                axios.get(this.generateGetUrl('') + query)
+                    .then(result => this.searchData = JSON.stringify(result.data, undefined, 2))
+                    .catch(error => this.searchData = JSON.stringify(error.response.data, undefined, 2));
             },
             generateGetUrl: function(val) {
                 let url = 'http://api.clonewarsapi.com/';
-                url += this.currentResource + '/' + val;
-                console.log(url)
+                if (val) {
+                    url += this.currentResource + '/' + val + '/';
+                }
+                else {
+                    url += this.currentResource + '/';
+                }
                 return url;
             },
             setCurrentResource: function(val) {
                 this.currentResource = val;
+            },
+            resetInputs: function() {
+                Object.keys(this.fields).forEach(key => {
+                    this.fields[key] = '';
+                });
+                this.resourcePage = 1;
+                setTimeout(() => { this.resourcePage = ''; }, 1);
+            }
+        },
+        computed: {
+            currentResourceFields: function() {
+                let currentFields;
+                switch (this.currentResource) {
+                    case 'characters':
+                        currentFields = this.charactersFields;
+                        break;
+                    case 'planets':
+                        currentFields = this.planetsFields;
+                        break;
+                    case 'species':
+                        currentFields = this.speciesFields;
+                        break;
+                    case 'vehicles':
+                        currentFields = this.vehiclesFields;
+                        break;
+                }
+                return currentFields;
             }
         },
     };

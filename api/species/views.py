@@ -29,7 +29,7 @@ def index(request):
     name = request.GET.get('name', None)
     designation = request.GET.get('designation', None)
     homeworld = request.GET.get('homeworld', None)
-    page = int(request.GET.get('page', 0))
+    page = request.GET.get('page', 0)
 
     species_set = Species.objects.all().order_by('id')
     if name:
@@ -44,6 +44,10 @@ def index(request):
         species_set = species_set.filter(info__homeworld__icontains=homeworld)
 
     if page:
+        try:
+            page = int(page)
+        except:
+            page = 1;
         start = settings.RESOURCE_LIMIT*(page-1)
         end = settings.RESOURCE_LIMIT*(page-1)+settings.RESOURCE_LIMIT
         species_set = species_set[start:end]

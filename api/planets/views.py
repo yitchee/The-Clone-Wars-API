@@ -29,7 +29,7 @@ def index(request):
     name = request.GET.get('name', None)
     affiliation = request.GET.get('affiliation', None)
     region = request.GET.get('region', None)
-    page = int(request.GET.get('page', 0))
+    page = request.GET.get('page', 0)
 
     planets_set = Planet.objects.all().order_by('id')
 
@@ -43,6 +43,10 @@ def index(request):
         planets_set = planets_set.filter(info__region__icontains=region)
 
     if page:
+        try:
+            page = int(page)
+        except:
+            page = 1;
         start = settings.RESOURCE_LIMIT*(page-1)
         end = settings.RESOURCE_LIMIT*(page-1)+settings.RESOURCE_LIMIT
         planets_set = planets_set[start:end]

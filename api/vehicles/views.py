@@ -30,7 +30,7 @@ def index(request):
     vehicle_class = request.GET.get('class', None)
     affiliation = request.GET.get('affiliation', None)
     manufacturer = request.GET.get('manufacturer', None)
-    page = int(request.GET.get('page', 0))
+    page = request.GET.get('page', 0)
 
     vehicles_set = Vehicle.objects.all().order_by('id')
     if name:
@@ -56,6 +56,10 @@ def index(request):
         vehicles_set = vehicles_set.filter(info__manufacturer__icontains=manufacturer)
 
     if page:
+        try:
+            page = int(page)
+        except:
+            page = 1;
         start = settings.RESOURCE_LIMIT*(page-1)
         end = settings.RESOURCE_LIMIT*(page-1)+settings.RESOURCE_LIMIT
         vehicles_set = vehicles_set[start:end]

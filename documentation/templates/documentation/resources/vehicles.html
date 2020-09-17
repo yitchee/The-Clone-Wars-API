@@ -38,6 +38,7 @@
             <span class="resources-sections-headings">Search Fields:</span>
             <ul>
                 <li><code>name</code></li>
+                <li><code>affiliation</code></li>
                 <li v-bind:class="{ '': !showVehiclesClass, 'mb-2': showVehiclesClass }">
                     <code>class</code>
                     <div class="search-options" @click="toggleShowVehiclesClass">
@@ -54,7 +55,6 @@
                         'Speeder' , 'Star Destroyer' , 'Starfighter' , 'Tank' , 'Transport' , 'Unknown' , 'Vessel' , 'Walker'
                     </span>
                 </li>
-                <li><code>affiliation</code></li>
                 <li>
                     <code>manufacturer</code>
                     <div class="search-options" @click="toggleShowVehiclesManufacturer">

@@ -206,7 +206,7 @@ pre {
             font-size: 1.5rem;
 
             &:hover {
-                background-color: rgb(39, 39, 39);
+                background-color: rgb(60, 60, 60);
                 color: white;
             }
 
@@ -214,6 +214,12 @@ pre {
                 color: #FFDE06;
                 background-color: black;
                 border-color: black;
+            }
+        }
+
+        #demo-search {
+            #demo-search-result {
+                max-height: 32rem;
             }
         }
     }

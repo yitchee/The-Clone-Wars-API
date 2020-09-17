@@ -130,11 +130,13 @@ pre {
     border-radius: .25rem;
     font-size: 1.5rem; }
     #docs-content #try-it-out .demo-resource-btn:hover {
-      background-color: #272727;
+      background-color: #3c3c3c;
       color: white; }
     #docs-content #try-it-out .demo-resource-btn.active-demo-resource-btn {
       color: #FFDE06;
       background-color: black;
       border-color: black; }
+  #docs-content #try-it-out #demo-search #demo-search-result {
+    max-height: 32rem; }
 
 /*# sourceMappingURL=documentation.css.map */

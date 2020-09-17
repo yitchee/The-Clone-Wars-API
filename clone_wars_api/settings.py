@@ -167,3 +167,5 @@ CORS_HEADERS = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, OPTIONS, HEAD'
 }
+
+API_KEY_LIMIT = 5000
