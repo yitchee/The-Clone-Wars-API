@@ -28,6 +28,36 @@ pre {
     }
 }
 
+#to-top-btn {
+    cursor: pointer;
+    width: max-content;
+    right: 0;
+    bottom: 0;
+    
+    svg {
+        width: 2rem;
+        height: 2rem;
+        fill: black;
+        opacity: 0.5;
+    }
+
+    &.small{
+        color: red;
+    }
+
+    &.medium{
+        color: blue;
+    }
+
+    &.large{
+        color: green;
+    }
+
+    &.xlarge{
+        color: yellow;
+    }
+}
+
 #docs-sidenav {
     border-radius: .5rem;
     top: 1rem;
@@ -217,10 +247,19 @@ pre {
             }
         }
 
-        #demo-search {
-            #demo-search-result {
-                max-height: 32rem;
-            }
+        .demo-result {
+            max-height: 32rem;
+            padding-top: .5rem;
+            padding-bottom: 1rem;
+        }
+
+        .query-variable {
+            color: red;
+            font-weight: bold;
+        }
+        .query-value {
+            color: rgb(0, 165, 0);
+            font-weight: bold;
         }
     }
     

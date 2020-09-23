@@ -8,7 +8,23 @@
 
 
 {% block content %}
-<h1>The Clone Wars API</h1>
+<div class="mx-auto flex flex-col w-11/12 sm:w-9/12 md:w-9/12 lg:w-3/4">
+    <div class="border-solid border-2 rounded-lg p-8">
+        <h1 class="text-center text-4xl font-bold">The Clone Wars API</h1>
+        <div class="grid grid-cols-3 gap-4">
+            <div>
+                The Clone Wars API is a HTTP web service for data about the animated series 
+                <a href="https://www.imdb.com/title/tt0458290/" class="text-blue-500 hover:underline">Star Wars: The Clone Wars</a>.
+                You can find information about the characters, planets, species, and vehicles that have appeared in series.
+            </div>
+            <div>
+                <a href="{% host_url 'documentation_view' host 'docs' %}try-it-out">Try it out!</a>
+                The Clone Wars API is a web service for data about the animated series 
+                <a href="https://www.imdb.com/title/tt0458290/" class="text-blue-500 hover:underline">Star Wars: The Clone Wars</a>.
+            </div>
+        </div>
+    </div>
+</div>
 <!-- <a href="{% host_url 'index' host 'api' %}">API</a>
 <a href="{% host_url 'documentation_view' host 'docs' %}">Documentation</a> -->
 {% endblock %}

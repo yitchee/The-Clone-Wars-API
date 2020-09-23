@@ -4,6 +4,9 @@
         <button v-on:click="getRandom" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             Get Random
         </button>
-        <pre v-text="randomData" v-if="randomData" class="mt-2 p-2"></pre>
+        <div v-if="randomUrl">Request URL: 
+            <code v-html="randomUrl" class="mt-2"></code>
+        </div>
+        <pre v-text="randomData" v-if="randomData" class="demo-result mt-2"></pre>
     </div>
 </section>

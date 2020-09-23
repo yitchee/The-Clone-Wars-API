@@ -22,6 +22,25 @@ pre {
     pre {
       width: 100%; } }
 
+#to-top-btn {
+  cursor: pointer;
+  width: max-content;
+  right: 0;
+  bottom: 0; }
+  #to-top-btn svg {
+    width: 2rem;
+    height: 2rem;
+    fill: black;
+    opacity: 0.5; }
+  #to-top-btn.small {
+    color: red; }
+  #to-top-btn.medium {
+    color: blue; }
+  #to-top-btn.large {
+    color: green; }
+  #to-top-btn.xlarge {
+    color: yellow; }
+
 #docs-sidenav {
   border-radius: .5rem;
   top: 1rem; }
@@ -136,7 +155,15 @@ pre {
       color: #FFDE06;
       background-color: black;
       border-color: black; }
-  #docs-content #try-it-out #demo-search #demo-search-result {
-    max-height: 32rem; }
+  #docs-content #try-it-out .demo-result {
+    max-height: 32rem;
+    padding-top: .5rem;
+    padding-bottom: 1rem; }
+  #docs-content #try-it-out .query-variable {
+    color: red;
+    font-weight: bold; }
+  #docs-content #try-it-out .query-value {
+    color: #00a500;
+    font-weight: bold; }
 
 /*# sourceMappingURL=documentation.css.map */
